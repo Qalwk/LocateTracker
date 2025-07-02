@@ -1,11 +1,35 @@
+import { useNavigate } from "react-router";
 import { type Flight } from "shared/mocks/FlightsData"
 import styles from './FlightCard.module.scss'
+import clsx from "clsx";
 
-export function FlightCard({ flight }: { flight: Flight }) {
+export function FlightCard({ flight, onClick, active = false }
+  : { 
+      flight: Flight, 
+      onClick?: (flight: Flight) => void, 
+      active?: boolean 
+    }) {
+
   const progress = 40; // или получить из пропсов/стейта
+  const navigate = useNavigate();
+
+  function slugify(str: string) {
+    return str.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  const handleClick = () => {
+    const airline = slugify(flight.airline);
+    const from = slugify(flight.from.city);
+    const to = slugify(flight.to.city);
+    navigate(`/${airline}/${from}-${to}`);
+    if (onClick) onClick(flight);
+  };
 
   return (
-    <div className={styles.flightCard}>
+    <div 
+      onClick={handleClick}
+      className={clsx(styles.flightCard, { [styles.active]: active })}
+    >
       <div className={styles.header}>
         <div className={styles.airline}>
           <div className={styles.airlineLogo}>

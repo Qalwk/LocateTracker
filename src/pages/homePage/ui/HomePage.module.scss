@@ -1,0 +1,14 @@
+.homePageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.homeWrapper {
+  height: 100vh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+}

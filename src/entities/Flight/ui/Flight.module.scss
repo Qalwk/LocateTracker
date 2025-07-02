@@ -1,0 +1,98 @@
+.airportInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.airportCode {
+  font-weight: 600;
+  font-size: 2.25rem;
+  color: var(--color-text);
+}
+
+.airportCity {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.airportUtc {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.flightProgressBar {
+  width: 100%;
+  margin: 16px 0;
+}
+
+.flightProgressTrack {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: #222;
+  border-radius: 3px;
+  overflow: visible;
+}
+
+.flightProgressPassed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(90deg, #ff4e50 0%, var(--color-accent) 50%, #ff6a00 100%);
+  z-index: 1;
+}
+
+.flightProgressPlane {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 1.3rem;
+  color: var(--color-text);
+  pointer-events: none;
+}
+
+.scheduleRow {
+  display: flex;
+  gap: 2rem;
+}
+
+.scheduleGroup {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scheduleLabel {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.scheduleValue {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.infoValue {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text);
+} 

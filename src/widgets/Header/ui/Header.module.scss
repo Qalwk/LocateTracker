@@ -1,0 +1,23 @@
+.header {
+  width: auto;
+  min-height: 3rem;
+  background-color: var(--color-default);
+  color: var(--color-text);
+  margin: $space-6;
+  border-radius: $radius-lg;
+  padding: 0 $space-6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: $shadow-main;
+}
+
+.theme {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary);
+}

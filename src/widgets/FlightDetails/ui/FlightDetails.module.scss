@@ -1,0 +1,219 @@
+.flightDetails {
+  min-width: $width-sm;
+  max-height: $height-4xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-right: $space-6;
+  background: linear-gradient(var(--color-default), var(--color-default)) padding-box;
+  border-radius: $radius-lg;
+  color: var(--color-text);
+  box-sizing: border-box;
+  padding: $space-3;
+  box-shadow: $shadow-main;
+}
+
+.airlineMainInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $space-3;
+}
+
+.airlineImage {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.flightNumber {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-wide;
+  color: var(--color-accent);
+}
+
+.flightNumberBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: $radius-lg;
+  background-color: var(--color-secondary);
+  padding: $space-3;
+}
+
+.closeButton {
+  width: 3rem;
+  height: 3rem;
+  border-radius: $radius-lg;
+}
+
+.flightStatic {
+  display: flex;
+  flex-direction: column;
+  border-radius: $radius-lg;
+  background-color: var(--color-secondary);
+  padding: $space-3;
+}
+
+.routeBlock {
+  display: flex;
+  align-items: center;
+  padding: $space-3;
+}
+
+.airportInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.airportCode {
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-4xl;
+  color: var(--color-text);
+}
+
+.airportUtc {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-light;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.progressBarBlock {
+  display: flex;
+  flex-direction: column;
+  padding: $space-5 0;
+}
+
+.progressInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.progressWrap {
+  display: flex;
+  flex-direction: row;
+  gap: $space-3;
+}
+
+.progressDistance,
+.progressDuration {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-light;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.scheduleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.scheduleRow {
+  display: flex;
+  gap: $space-5;
+}
+
+.scheduleGroup {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scheduleLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-light;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  border-radius: $radius-lg;
+  background-color: var(--color-secondary);
+  padding: $space-3;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: $space-3;
+}
+
+.infoTech {
+  display: flex;
+  flex-direction: row;
+  gap: $space-5;
+  padding-bottom: $space-3;
+}
+
+.infoTechText {
+  width: 50%;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: row;
+  gap: $space-5;
+}
+
+.flightProgressBar {
+  width: 100%;
+  margin: 16px 0;
+}
+
+.flightProgressTrack {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: #222; // цвет неактивной части
+  border-radius: 3px;
+  overflow: visible;
+}
+
+.flightProgressPassed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(90deg, #ff4e50 0%, var(--color-accent) 50%, #ff6a00 100%);
+  z-index: 1;
+}
+
+.flightProgressPlane {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 1.3rem;
+  color: var(--color-text);
+  pointer-events: none;
+}
+
+.actionsBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
