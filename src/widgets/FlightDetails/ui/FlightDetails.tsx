@@ -7,10 +7,13 @@ import { FlightDetailsInfo } from "./FlightDetailsInfo"
 import { FlightDetailsActions } from "./FlightDetailsActions"
 import styles from './FlightDetails.module.scss'
 
-export function FlightDetails({ flight, onClose }: { flight: Flight | null, onClose: () => void }) {
+export function FlightDetails({ flight, onClose, progress }: 
+  { flight: Flight | null, 
+    onClose: () => void, 
+    progress:number 
+  }) {
+    
   if (!flight) return null;
-  // Пример вычисления прогресса (можно заменить на реальный расчёт)
-  const progress = 40;
   return (
     <div className={styles.flightDetails}>
       <FlightDetailsHeader flight={flight} onClose={onClose} />

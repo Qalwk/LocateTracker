@@ -1,4 +1,5 @@
 .flightCard {
+  width: $width-sm;
   box-sizing: border-box;
   border: 3px solid transparent;
   border-radius: $radius-lg;
@@ -69,6 +70,20 @@
   font-size: $font-size-xs;
   color: var(--color-text);
   font-weight: $font-weight-light;
+  max-height: 26px;
+}
+
+.btnLike {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btnLikeActive {
+  color: var(--color-default);
+  background-color: var(--color-accent);
 }
 
 .airports {

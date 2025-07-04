@@ -12,3 +12,29 @@
   display: flex;
   flex-direction: column;
 }
+
+.flight {
+  margin-left: $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;;
+  min-width: $width-xs;
+}
+
+.btnWrap {
+  width: $width-sm;
+  display: flex;
+  flex-direction: row;
+  gap: $space-3;
+}
+
+.buttonFilter {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  width: 50%;
+}
+
+.buttonFilterActive {
+  background-color: var(--color-accent);
+  color: var(--color-default);
+}

@@ -2,22 +2,32 @@ import { useNavigate } from "react-router";
 import { type Flight } from "shared/mocks/FlightsData"
 import styles from './FlightCard.module.scss'
 import clsx from "clsx";
+import { Heart } from "lucide-react";
 
-export function FlightCard({ flight, onClick, active = false }
-  : { 
-      flight: Flight, 
-      onClick?: (flight: Flight) => void, 
-      active?: boolean 
-    }) {
+interface FlightCardProps {
+  flight: Flight;
+  onClick?: (flight: Flight) => void;
+  active?: boolean;
+  isFavorite: boolean;
+  onLikeClick: () => void;
+  progress: number;
+}
 
-  const progress = 40; // или получить из пропсов/стейта
+export function FlightCard({
+  flight,
+  onClick,
+  active = false,
+  isFavorite,
+  onLikeClick,
+  progress,
+}: FlightCardProps) {
   const navigate = useNavigate();
 
   function slugify(str: string) {
     return str.toLowerCase().replace(/\s+/g, '-');
   }
 
-  const handleClick = () => {
+  const handleLinked = () => {
     const airline = slugify(flight.airline);
     const from = slugify(flight.from.city);
     const to = slugify(flight.to.city);
@@ -27,7 +37,7 @@ export function FlightCard({ flight, onClick, active = false }
 
   return (
     <div 
-      onClick={handleClick}
+      onClick={handleLinked}
       className={clsx(styles.flightCard, { [styles.active]: active })}
     >
       <div className={styles.header}>
@@ -40,6 +50,12 @@ export function FlightCard({ flight, onClick, active = false }
         <div className={styles.codes}>
           <span className={styles.code}>{flight.codes[0]}</span>
           <span className={styles.code}>{flight.codes[1]}</span>
+          <button
+            className={clsx(styles.btnLike, { [styles.btnLikeActive]: isFavorite })}
+            onClick={e => { e.stopPropagation(); onLikeClick(); }}
+          >
+            <Heart size={16} fill={isFavorite ? "currentColor" : "none"} />
+          </button>
         </div>
       </div>
       <div className={styles.airports}>
