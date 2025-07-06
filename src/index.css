@@ -1,6 +1,7 @@
 @import './shared/styles/theme.css';
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+
 :root {
   font-family: 'JetBrains Mono', 'JetBrains', Arial, sans-serif;
   line-height: 1.5;
@@ -67,12 +68,8 @@ button:hover {
 input {
   /* border: none;
   outline: none; */
-  background: none;
   box-shadow: none;
   font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  padding: 0;
   margin: 0;
   appearance: none;
 }

@@ -1,4 +1,7 @@
 .flightList {
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: $space-2;

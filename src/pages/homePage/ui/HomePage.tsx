@@ -1,5 +1,5 @@
 import { FlightList } from "features/FlightList";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { FlightDetails } from "widgets/FlightDetails";
 import { type Flight } from "shared/mocks/FlightsData";
 import styles from './HomePage.module.scss';
@@ -10,11 +10,16 @@ import { flightsData } from 'shared/mocks/FlightsData';
 import { addFavorite, removeFavorite } from "shared/model/favoriteFlightsSlice";
 import type { RootState } from "app/store";
 import { useLocation } from "react-router";
-import FlightFilters from "./FlightFilters";
+import { FlightFilters } from "./FlightFilters";
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
+
+  const [flightId, setFlightId] = useState<string>('');
+  const [flightCompany, setFlightCompany] = useState<string>('');
+  const [flightFrom, setFlightFrom] = useState<string>('');
+  const [flightTo, setFlightTo] = useState<string>('');
 
   const location = useLocation();
 
@@ -29,9 +34,29 @@ export function HomePage() {
   const favorites = useSelector((state: RootState) => state.favoriteFlights.ids);
   const dispatch = useDispatch();
   
-  const filteredFlights = isFavorite === true
+  const baseFlights = isFavorite === true
     ? flightsData.filter(flight => favorites.includes(flight.id))
     : flightsData;
+
+  const filteredFlights = useMemo(() => {
+    return baseFlights.filter((flight) => {
+      const matchId = flightId 
+        ? flight.id.toLowerCase().includes(flightId.toLowerCase()) 
+        : true;
+      const matchCompany = flightCompany 
+        ? flight.airline.toLowerCase().includes(flightCompany.toLowerCase()) 
+        : true;
+      const matchFrom = flightFrom
+        ? flight.from.city.toLowerCase().includes(flightFrom.toLowerCase()) 
+        || flight.from.iata.toLowerCase().includes(flightFrom.toLowerCase())
+        : true;
+      const matchTo = flightTo
+        ? flight.to.city.toLowerCase().includes(flightTo.toLowerCase()) 
+        || flight.to.iata.toLowerCase().includes(flightTo.toLowerCase())
+        : true;
+      return matchId && matchCompany && matchFrom && matchTo;
+    });
+  }, [baseFlights, flightId, flightCompany, flightFrom, flightTo]);
 
   const handleLikeClick = (flightId: string) => {
     if (favorites.includes(flightId)) {
@@ -51,7 +76,16 @@ export function HomePage() {
           <FlightTabs 
             isFavorite={isFavorite}
           />
-          <FlightFilters />
+          <FlightFilters 
+              flightId={flightId}
+              setFlightId={setFlightId}
+              flightCompany={flightCompany}
+              setFlightCompany={setFlightCompany}
+              flightFrom={flightFrom}
+              setFlightFrom={setFlightFrom}
+              flightTo={flightTo}
+              setFlightTo={setFlightTo}
+          />
           <FlightList 
             flights={filteredFlights}
             onSelect={setSelectedFlight}

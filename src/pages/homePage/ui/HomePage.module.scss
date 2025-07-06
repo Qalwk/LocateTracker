@@ -41,11 +41,23 @@
 .filtersWrap {
   display: flex;
   flex-direction: row;
-  gap: $space-3;
+  gap: 3%;
+  background-color: var(--color-accent);
+  padding: $space-2 $space-6;
+  border-radius: $radius-lg;
 }
 
 .filter {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 23%;
+  gap: $space-1;
+}
+
+input {
+  border-radius: $radius-lg;
+  padding-left: $space-1;
+  font-size: $font-size-sm;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
 }
