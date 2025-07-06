@@ -5,8 +5,9 @@ interface FavoriteFlightsState {
   ids: string[];
 }
 
+const persistedFavorites = localStorage.getItem('favoriteFlights');
 const initialState: FavoriteFlightsState = {
-  ids: [],
+  ids: persistedFavorites ? JSON.parse(persistedFavorites) : [],
 };
 
 export const favoriteFlightsSlice = createSlice({

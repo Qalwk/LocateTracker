@@ -66,6 +66,10 @@ export function HomePage() {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem('favoriteFlights', JSON.stringify(favorites));
+  }, [favorites]);
+
   const progressBar = 60
   
   return (
