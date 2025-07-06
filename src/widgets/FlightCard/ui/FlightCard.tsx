@@ -21,6 +21,7 @@ export function FlightCard({
   onLikeClick,
   progress,
 }: FlightCardProps) {
+  
   const navigate = useNavigate();
 
   function slugify(str: string) {

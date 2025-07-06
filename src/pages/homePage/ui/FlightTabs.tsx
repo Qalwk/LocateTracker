@@ -10,8 +10,6 @@ export function FlightTabs({ isFavorite }: FlightTabsProps) {
 
   const navigate = useNavigate();
 
-  // const handleFavoritesClick = () => { setActiveTab('favorites'), navigate('/favorites')};
-  // const handleAllClick = () => setActiveTab('all');
   const handleAllClick = () => navigate('/');
   const handleFavoritesClick = () => navigate('/favorites');
 

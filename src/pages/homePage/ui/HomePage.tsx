@@ -10,6 +10,7 @@ import { flightsData } from 'shared/mocks/FlightsData';
 import { addFavorite, removeFavorite } from "shared/model/favoriteFlightsSlice";
 import type { RootState } from "app/store";
 import { useLocation } from "react-router";
+import FlightFilters from "./FlightFilters";
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
@@ -18,10 +19,10 @@ export function HomePage() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/') {
-      setIsFavorite(false)
-    } else {
+    if (location.pathname === '/favorites' ) {
       setIsFavorite(true)
+    } else {
+      setIsFavorite(false)
     }
   }, [location])
 
@@ -39,7 +40,7 @@ export function HomePage() {
       dispatch(addFavorite(flightId));
     }
   };
-  
+
   const progressBar = 60
   
   return (
@@ -50,6 +51,7 @@ export function HomePage() {
           <FlightTabs 
             isFavorite={isFavorite}
           />
+          <FlightFilters />
           <FlightList 
             flights={filteredFlights}
             onSelect={setSelectedFlight}

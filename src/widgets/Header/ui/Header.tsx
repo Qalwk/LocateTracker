@@ -4,10 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setTheme, toggleTheme } from 'shared/model/themeSlice';
 import type { RootState } from 'app/store';
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 export function Header() {
 
   const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
   const dispatch = useDispatch()
+
+  const navigate = useNavigate();
+
+  const handleHomeLink = () => navigate('/')
 
   useEffect(() => {
     if (currentTheme === 'dark') {
@@ -30,7 +35,9 @@ export function Header() {
   
   return (
     <div className={styles.header}>
-      <p>LOGO</p>
+      <div onClick={handleHomeLink}>
+        <p>LOGO</p>
+      </div>
       <div>
         <button onClick={() => dispatch(toggleTheme())} className={styles.theme}>
           <Palette color="var(--color-text)"/>
