@@ -3,6 +3,7 @@ import { type Flight } from "shared/mocks/FlightsData"
 import styles from './FlightCard.module.scss'
 import clsx from "clsx";
 import { Heart } from "lucide-react";
+import FlightStatus from "entities/Flight/ui/FlightStatus";
 
 interface FlightCardProps {
   flight: Flight;
@@ -64,10 +65,7 @@ export function FlightCard({
           <span className={styles.city}>{flight.from.city}</span>
           <span className={styles.iata}>{flight.from.iata}</span>
         </div>
-        <div className={styles.routeLine}>
-          <div className={styles.routeProgress} style={{ width: `${progress}%` }} />
-          <span className={styles.planeIcon} style={{ left: `${progress}%` }}>✈️</span>
-        </div>
+        <FlightStatus progress={progress} />
         <div className={`${styles.airport} ${styles.to}`}>
           <span className={styles.city}>{flight.to.city}</span>
           <span className={styles.iata}>{flight.to.iata}</span>

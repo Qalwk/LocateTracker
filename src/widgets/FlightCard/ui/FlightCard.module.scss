@@ -117,37 +117,3 @@
   letter-spacing: $letter-spacing-wide;
   color: var(--color-text);
 }
-
-.routeLine {
-  flex: 1;
-  height: 0.125rem;
-  background: var(--color-secondary);
-  margin: 0 $space-4;
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: visible;
-  border-radius: $radius-lg;
-}
-
-.routeProgress {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 40%;
-  background: linear-gradient(90deg, var(--color-accent) 0%, #ff6a00 100%);
-  border-radius: 0.125rem;
-  z-index: 1;
-}
-
-.planeIcon {
-  position: absolute;
-  left: 40%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  font-size: 1.25rem;
-  color: var(--color-default);
-  pointer-events: none;
-}
