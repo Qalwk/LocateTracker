@@ -1,5 +1,5 @@
 import { FlightList } from "features/FlightList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlightDetails } from "widgets/FlightDetails";
 import { type Flight } from "shared/mocks/FlightsData";
 import styles from './HomePage.module.scss';
@@ -8,17 +8,29 @@ import { FlightTabs } from "./FlightTabs";
 import { useDispatch, useSelector } from "react-redux";
 import { flightsData } from 'shared/mocks/FlightsData';
 import { addFavorite, removeFavorite } from "shared/model/favoriteFlightsSlice";
+import type { RootState } from "app/store";
+import { useLocation } from "react-router";
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
-  const [activeTab, setActiveTab] = useState<'all' | 'favorites'>('all');
+  const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
-  const favorites = useSelector((state: any) => state.favoriteFlights.ids);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setIsFavorite(false)
+    } else {
+      setIsFavorite(true)
+    }
+  }, [location])
+
+  const favorites = useSelector((state: RootState) => state.favoriteFlights.ids);
   const dispatch = useDispatch();
   
-  const filteredFlights = activeTab === 'all'
-    ? flightsData
-    : flightsData.filter(flight => favorites.includes(flight.id));
+  const filteredFlights = isFavorite === true
+    ? flightsData.filter(flight => favorites.includes(flight.id))
+    : flightsData;
 
   const handleLikeClick = (flightId: string) => {
     if (favorites.includes(flightId)) {
@@ -27,7 +39,7 @@ export function HomePage() {
       dispatch(addFavorite(flightId));
     }
   };
-
+  
   const progressBar = 60
   
   return (
@@ -36,8 +48,7 @@ export function HomePage() {
       <div className={styles.homePageContainer}>
         <div className={styles.flight}>
           <FlightTabs 
-            activeTab={activeTab} 
-            setActiveTab={setActiveTab}
+            isFavorite={isFavorite}
           />
           <FlightList 
             flights={filteredFlights}

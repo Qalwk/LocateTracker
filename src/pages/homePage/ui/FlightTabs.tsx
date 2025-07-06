@@ -1,27 +1,31 @@
 import clsx from 'clsx';
 import styles from './HomePage.module.scss';
+import { useNavigate } from 'react-router';
 
 interface FlightTabsProps {
-  activeTab: 'all' | 'favorites';
-  setActiveTab: (tab: 'all' | 'favorites') => void;
+  isFavorite: boolean | null;
 }
 
-export function FlightTabs({ activeTab, setActiveTab }: FlightTabsProps) {
+export function FlightTabs({ isFavorite }: FlightTabsProps) {
 
-  const handleAllClick = () => setActiveTab('all');
-  const handleFavoritesClick = () => setActiveTab('favorites');
+  const navigate = useNavigate();
+
+  // const handleFavoritesClick = () => { setActiveTab('favorites'), navigate('/favorites')};
+  // const handleAllClick = () => setActiveTab('all');
+  const handleAllClick = () => navigate('/');
+  const handleFavoritesClick = () => navigate('/favorites');
 
   return (
     <div className={styles.btnWrap}>
       <button 
         onClick={handleAllClick}
-        className={clsx(styles.buttonFilter, { [styles.buttonFilterActive]: activeTab === 'all' })}
+        className={clsx(styles.buttonFilter, { [styles.buttonFilterActive]: !isFavorite })}
       >
         All
       </button>
       <button 
         onClick={handleFavoritesClick}
-        className={clsx(styles.buttonFilter, { [styles.buttonFilterActive]: activeTab === 'favorites' })}
+        className={clsx(styles.buttonFilter, { [styles.buttonFilterActive]: isFavorite })}
       >
         Favorites
       </button>
