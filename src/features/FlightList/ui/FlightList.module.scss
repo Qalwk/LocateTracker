@@ -17,3 +17,9 @@
   /* Для IE и Edge (устаревшие) */
   -ms-overflow-style: none;
 }
+
+.skeleton {
+  background-color: var(--color-default);
+  color: var(--color-default);  
+  width: $width-xs;
+}

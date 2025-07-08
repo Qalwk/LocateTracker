@@ -1,6 +1,9 @@
 import { type Flight } from "shared/mocks/FlightsData"
 import { FlightCard } from "widgets/FlightCard/ui/FlightCard"
 import styles from './FlightList.module.scss'
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface FlightListProps {
   flights: Flight[];
@@ -19,9 +22,26 @@ export function FlightList({
   favorites,
   onLikeClick,
 }: FlightListProps) {
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
+  
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [])
+
   return (
     <div className={styles.flightList}>
-      {flights.map((flight) => (
+      {isLoading 
+      ? 
+      <Skeleton count={5} height={100} className={styles.skeleton} />
+      :
+      flights.map((flight) => (
         <FlightCard
           key={flight.id}
           flight={flight}
