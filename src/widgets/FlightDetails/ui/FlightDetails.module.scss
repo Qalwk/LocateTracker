@@ -5,11 +5,11 @@
   flex-direction: column;
   gap: $space-2;
   margin-right: $space-6;
-  background: linear-gradient(var(--color-default), var(--color-default)) padding-box;
   border-radius: $radius-lg;
   color: var(--color-text);
   box-sizing: border-box;
   padding: $space-3;
+  background: linear-gradient(var(--color-default), var(--color-default)) padding-box;
   box-shadow: $shadow-main;
 }
 

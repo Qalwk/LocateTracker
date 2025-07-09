@@ -56,7 +56,7 @@ export function FlightCard({
         </div>
         <div className={styles.codes}>
           <span className={styles.code}>{flight.codes[0]}</span>
-          <span className={styles.code}>{flight.codes[1]}</span>
+          <span className={`${styles.code} ${styles.codeSecond}`}>{flight.codes[1]}</span>
           <button
             className={clsx(styles.btnLike, { [styles.btnLikeActive]: isFavorite })}
             onClick={e => { e.stopPropagation(); onLikeClick(); }}

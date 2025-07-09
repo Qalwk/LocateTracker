@@ -7,7 +7,6 @@
   padding: $space-6;
   display: flex;
   flex-direction: column;
-  min-width: $width-xs;
   font-size: $font-size-base;
   box-shadow: $shadow-main;
   transition: background 1s, box-shadow 1s;
@@ -116,4 +115,11 @@
   font-weight: $font-weight-semibold;
   letter-spacing: $letter-spacing-wide;
   color: var(--color-text);
+}
+
+// Планшет
+@media (min-width: 760px) and (max-width: 1023px) {
+  .codeSecond {
+    display: none;
+  }
 }

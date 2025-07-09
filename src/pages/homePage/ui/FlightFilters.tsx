@@ -33,7 +33,7 @@ export function FlightFilters({
         />
       </div>
       <div className={styles.filter}>
-        <label htmlFor="flight-company">Company</label>
+        <label htmlFor="flight-company">Comp.</label>
         <input 
           id="flight-company" 
           type="text" 

@@ -61,3 +61,22 @@ input {
   background-color: var(--color-secondary);
   color: var(--color-text);
 }
+
+// Планшет
+@media (min-width: 760px) and (max-width: 1023px) {
+  .homePageContainer {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  .flight { width: 45%; }
+  .filtersWrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10%;
+  }
+  
+  .filter {
+    width: 40%;
+  }
+}
