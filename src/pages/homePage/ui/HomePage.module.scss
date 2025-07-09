@@ -66,6 +66,10 @@ input {
   color: var(--color-default);
 }
 
+.buttonText {
+  color: var(--color-default);
+}
+
 // Планшет
 @media (min-width: 760px) and (max-width: 1023px) {
   .homePageContainer {

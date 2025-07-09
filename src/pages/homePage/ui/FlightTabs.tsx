@@ -17,13 +17,25 @@ export function FlightTabs({ isFavorite }: FlightTabsProps) {
     <div className={styles.btnWrap}>
       <button 
         onClick={handleAllClick}
-        className={clsx(styles.buttonFilter, { [styles.buttonFilterActive]: !isFavorite })}
+        className={clsx(
+          styles.buttonFilter, 
+          { 
+            [styles.buttonFilterActive]: !isFavorite,
+            [styles.buttonText]: !isFavorite
+          }
+        )}
       >
         All
       </button>
       <button 
         onClick={handleFavoritesClick}
-        className={clsx(styles.buttonFilter, { [styles.buttonFilterActive]: isFavorite })}
+        className={clsx(
+          styles.buttonFilter, 
+          { 
+            [styles.buttonFilterActive]: isFavorite,
+            [styles.buttonText]: isFavorite
+          }
+        )}
       >
         Favorites
       </button>
