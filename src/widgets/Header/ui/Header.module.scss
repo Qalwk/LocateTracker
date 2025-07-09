@@ -1,9 +1,13 @@
 .header {
-  width: auto;
+  position: fixed;
+  box-sizing: border-box;
+  top: $space-6;
+  left: $space-6;
+  right: $space-6;
+  z-index: 1000;
   height: auto;
   background-color: var(--color-default);
   color: var(--color-text);
-  margin: $space-6;
   border-radius: $radius-lg;
   padding: 0 $space-6;
   display: flex;

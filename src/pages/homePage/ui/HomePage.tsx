@@ -80,7 +80,7 @@ export function HomePage() {
     <div className={styles.homeWrapper}>
       <Header />
       <div className={styles.homePageContainer}>
-      <div className={clsx(styles.flight, { [styles.hide]: isMobile && selectedFlight })}>
+        <div className={clsx(styles.flight, { [styles.hide]: isMobile && selectedFlight })}>
           <div className={styles.flightParams}>
             <FlightTabs 
               isFavorite={isFavorite}

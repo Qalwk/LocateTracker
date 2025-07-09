@@ -11,6 +11,7 @@
   padding: $space-3;
   background: linear-gradient(var(--color-default), var(--color-default)) padding-box;
   box-shadow: $shadow-main;
+  margin-top: $space-24;
 }
 
 .airlineMainInfo {
@@ -225,6 +226,7 @@
     min-width: 100%;
     margin: 0px;
     z-index: 100;
+    margin-top: $space-24;
   }
 
   .closeButton {
