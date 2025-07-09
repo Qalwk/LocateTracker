@@ -24,7 +24,7 @@ export function HomePage() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/favorites' ) {
+    if (location.pathname.includes('/favorites') ) {
       setIsFavorite(true)
     } else {
       setIsFavorite(false)

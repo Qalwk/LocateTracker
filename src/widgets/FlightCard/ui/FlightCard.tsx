@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { type Flight } from "shared/mocks/FlightsData"
 import styles from './FlightCard.module.scss'
 import clsx from "clsx";
@@ -24,6 +24,7 @@ export function FlightCard({
 }: FlightCardProps) {
   
   const navigate = useNavigate();
+  const location = useLocation();
 
   function slugify(str: string) {
     return str.toLowerCase().replace(/\s+/g, '-');
@@ -33,7 +34,11 @@ export function FlightCard({
     const airline = slugify(flight.airline);
     const from = slugify(flight.from.city);
     const to = slugify(flight.to.city);
-    navigate(`/${airline}/${from}-${to}`);
+    if(location.pathname.includes('/favorites')) {
+      navigate(`/favorites/${airline}/${from}-${to}`)
+    } else {
+      navigate(`/${airline}/${from}-${to}`)
+    }
     if (onClick) onClick(flight);
   };
 

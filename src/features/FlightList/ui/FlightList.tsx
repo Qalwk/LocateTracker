@@ -39,7 +39,7 @@ export function FlightList({
     <div className={styles.flightList}>
       {isLoading 
       ? 
-      <Skeleton count={5} height={100} className={styles.skeleton} />
+      <Skeleton count={10} className={styles.skeleton} />
       :
       flights.map((flight) => (
         <FlightCard
