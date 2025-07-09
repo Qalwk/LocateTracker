@@ -35,7 +35,7 @@
 
 .buttonFilterActive {
   background-color: var(--color-accent);
-  color: var(--color-default);
+  color: var(--color-text);
 }
 
 .filtersWrap {
@@ -59,7 +59,11 @@ input {
   padding-left: $space-1;
   font-size: $font-size-sm;
   background-color: var(--color-secondary);
-  color: var(--color-text);
+  color: var(--color-default);
+}
+
+.filter label {
+  color: var(--color-default);
 }
 
 // Планшет
