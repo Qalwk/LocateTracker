@@ -123,3 +123,10 @@
     display: none;
   }
 }
+
+// Мобильные устройства
+@media (max-width: 759px) {
+  .codeSecond {
+    display: none;
+  }
+}

@@ -128,3 +128,11 @@
   color: var(--color-default);
   pointer-events: none;
 }
+
+// Мобильные устройства
+@media (max-width: 759px) {
+  .scheduleGroup {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -11,6 +11,7 @@ import { addFavorite, removeFavorite } from "shared/model/favoriteFlightsSlice";
 import type { RootState } from "app/store";
 import { useLocation } from "react-router";
 import { FlightFilters } from "./FlightFilters";
+import { useIsMobile } from "shared/hooks/useIsMobile";
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
@@ -71,25 +72,35 @@ export function HomePage() {
   }, [favorites]);
 
   const progressBar = 60
+
+  const isMobile = useIsMobile();
   
   return (
     <div className={styles.homeWrapper}>
       <Header />
       <div className={styles.homePageContainer}>
+        {isMobile
+        ?
+        selectedFlight 
+        ?
+        0
+        :
         <div className={styles.flight}>
-          <FlightTabs 
-            isFavorite={isFavorite}
-          />
-          <FlightFilters 
-              flightId={flightId}
-              setFlightId={setFlightId}
-              flightCompany={flightCompany}
-              setFlightCompany={setFlightCompany}
-              flightFrom={flightFrom}
-              setFlightFrom={setFlightFrom}
-              flightTo={flightTo}
-              setFlightTo={setFlightTo}
-          />
+          <div className={styles.flightParams}>
+            <FlightTabs 
+              isFavorite={isFavorite}
+            />
+            <FlightFilters 
+                flightId={flightId}
+                setFlightId={setFlightId}
+                flightCompany={flightCompany}
+                setFlightCompany={setFlightCompany}
+                flightFrom={flightFrom}
+                setFlightFrom={setFlightFrom}
+                flightTo={flightTo}
+                setFlightTo={setFlightTo}
+            />
+          </div>
           <FlightList 
             flights={filteredFlights}
             onSelect={setSelectedFlight}
@@ -99,6 +110,33 @@ export function HomePage() {
             progress={progressBar}
           />
         </div>
+        :
+        <div className={styles.flight}>
+          <div className={styles.flightParams}>
+            <FlightTabs 
+              isFavorite={isFavorite}
+            />
+            <FlightFilters 
+                flightId={flightId}
+                setFlightId={setFlightId}
+                flightCompany={flightCompany}
+                setFlightCompany={setFlightCompany}
+                flightFrom={flightFrom}
+                setFlightFrom={setFlightFrom}
+                flightTo={flightTo}
+                setFlightTo={setFlightTo}
+            />
+          </div>
+          <FlightList 
+            flights={filteredFlights}
+            onSelect={setSelectedFlight}
+            selectedFlight={selectedFlight}
+            onLikeClick={handleLikeClick}
+            favorites={favorites}
+            progress={progressBar}
+          />
+        </div>
+        }
         <FlightDetails 
           progress={progressBar}
           flight={selectedFlight}

@@ -7,6 +7,7 @@
 }
 
 .homeWrapper {
+  // padding-top: 72px;
   height: 100vh;
   width: 100dvw;
   display: flex;
@@ -19,6 +20,12 @@
   flex-direction: column;
   gap: $space-2;;
   width: $width-sm;
+}
+
+.flightParams {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;;
 }
 
 .btnWrap {
@@ -59,7 +66,7 @@ input {
   padding-left: $space-1;
   font-size: $font-size-sm;
   background-color: var(--color-secondary);
-  color: var(--color-default);
+  color: var(--color-text);
 }
 
 .filter label {
@@ -75,7 +82,6 @@ input {
   .homePageContainer {
     flex-direction: row;
     gap: 1rem;
-    padding: 0.5rem;
   }
   .flight { width: 45%; }
   .filtersWrap {
@@ -86,5 +92,34 @@ input {
   
   .filter {
     width: 40%;
+  }
+}
+
+// Мобильные устройства
+@media (max-width: 759px) {
+  .homePageContainer {
+    position: relative;
+    flex-direction: row;
+    margin: 0px 24px;
+    gap: 1rem;
+    min-height: 100%;
+  }
+  .flight { 
+    width: 100%; 
+    margin-left: 0;
+  }
+  .filtersWrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .filter {
+    width: 45%;
+  }
+
+  .filter label {
+    font-size: $font-size-sm;
   }
 }

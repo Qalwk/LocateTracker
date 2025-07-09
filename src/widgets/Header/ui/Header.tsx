@@ -35,14 +35,14 @@ export function Header() {
   
   return (
     <div className={styles.header}>
-      <div onClick={handleHomeLink}>
-        <p>LOGO</p>
-      </div>
-      <div>
-        <button onClick={() => dispatch(toggleTheme())} className={styles.theme}>
-          <Palette color="var(--color-text)"/>
-        </button>
-      </div>
+        <div onClick={handleHomeLink}>
+          <p>LOGO</p>
+        </div>
+        <div>
+          <button onClick={() => dispatch(toggleTheme())} className={styles.theme}>
+            <Palette color="var(--color-text)"/>
+          </button>
+        </div>
     </div>
   )
 }

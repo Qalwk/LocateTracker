@@ -217,3 +217,39 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+// Мобильные устройства
+@media (max-width: 759px) {
+  .flightDetails {
+    position: absolute;
+    min-width: 100%;
+    margin: 0px;
+    z-index: 100;
+  }
+
+  .closeButton {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 8px;
+  }
+
+  .infoTech {
+    display: flex;
+    flex-direction: row;
+    gap: $space-5;
+    padding-bottom: $space-3;
+  }
+  
+  .infoTechText {
+    text-align: center;
+  }
+
+  .routeBlock {
+    padding: 0;
+  }
+
+  .progressBarBlock {
+    padding: $space-5 $space-5;
+  }
+}
+
