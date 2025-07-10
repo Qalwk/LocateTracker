@@ -1,0 +1,38 @@
+.loginWrapper {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  background-color: var(--color-default);
+  border-radius: $radius-lg;
+  color: var(--color-text);
+  padding: $space-10 $space-10;
+  gap: $space-6;
+}
+
+.loginFieldWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: $space-3;
+  width: 100%;
+}
+
+.loginField {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.loginError {
+  display: none;
+}

@@ -1,12 +1,14 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { HomePage } from 'pages/homePage'
+import { LoginPage } from 'pages/loginPage'
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LoginPage />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/:airline/:route" element={<HomePage />} />
         <Route path="/favorites" element={<HomePage />} />
         <Route path="/favorites/:airline/:route" element={<HomePage />} />
