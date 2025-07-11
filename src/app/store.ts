@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { favoriteFlightsSlice } from 'shared/model/favoriteFlightsSlice'
+import { favoriteFlightsSlice } from 'entities/Flight/model/favoriteFlightsSlice'
 import { themeSlice } from 'shared/model/themeSlice'
 
 export const store = configureStore({

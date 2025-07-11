@@ -7,7 +7,7 @@ import { Header } from "widgets/Header";
 import { FlightTabs } from "./FlightTabs";
 import { useDispatch, useSelector } from "react-redux";
 import { flightsData } from 'shared/mocks/FlightsData';
-import { addFavorite, removeFavorite } from "shared/model/favoriteFlightsSlice";
+import { addFavorite, removeFavorite } from "entities/Flight/model/favoriteFlightsSlice";
 import type { RootState } from "app/store";
 import { useLocation } from "react-router";
 import { FlightFilters } from "./FlightFilters";
