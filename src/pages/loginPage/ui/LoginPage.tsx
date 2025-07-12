@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import styles from "./LoginPage.module.scss"
 import { useAuth } from "shared/model/auth/model/authContext"
 import { useNavigate } from "react-router"
+import { users } from "shared/mocks/UserData"
 
 interface LoginFormInputs {
   email: string
@@ -13,12 +14,22 @@ export function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<LoginFormInputs>()
 
   const onSubmit = (data: LoginFormInputs) => {
-    // Здесь должен быть запрос к серверу и получение токена
-    login("demo-token"); // временно
-    navigate("/");
+
+    const foundUser = users.find(
+      (user) => user.email === data.email && user.password === data.password
+    );
+
+    if(foundUser) {
+      // Здесь должен быть запрос к серверу и получение токена
+      login("demo-token"); // временно
+      navigate("/");
+    } else {
+      setError("password", { type: "manual", message: "Неверный email или пароль" });
+    }
   };
 
   const navigate = useNavigate();
@@ -34,7 +45,7 @@ export function LoginPage() {
             <label htmlFor="email">Email</label>
             <input
               id="email"
-              type="email"
+              type="text"
               autoComplete="username"
               {...register("email", {
                 required: "Введите email",
