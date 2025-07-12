@@ -3,11 +3,12 @@ import styles from "./LoginPage.module.scss"
 import { useAuth } from "shared/model/auth/model/authContext"
 import { useNavigate } from "react-router"
 import { users } from "shared/mocks/UserData"
+import type z from "zod"
+import { formSchema } from "features/auth/model/loginSchema"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from "react"
 
-interface LoginFormInputs {
-  email: string
-  password: string
-}
+type FormSchema = z.infer<typeof formSchema>
 
 export function LoginPage() {
   const {
@@ -15,10 +16,10 @@ export function LoginPage() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<LoginFormInputs>()
+    setFocus,
+  } = useForm<FormSchema>({ resolver: zodResolver(formSchema) })
 
-  const onSubmit = (data: LoginFormInputs) => {
-
+  const onSubmit = (data: FormSchema) => {
     const foundUser = users.find(
       (user) => user.email === data.email && user.password === data.password
     );
@@ -31,6 +32,11 @@ export function LoginPage() {
       setError("password", { type: "manual", message: "Неверный email или пароль" });
     }
   };
+
+  useEffect(() => {
+    // устанавливаем фокус на первое поле (имя пользователя) после монтирования компонента
+    setFocus('email')
+  }, [])
 
   const navigate = useNavigate();
 
