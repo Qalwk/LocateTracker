@@ -85,9 +85,7 @@ export function HomePage() {
   }, [favorites]);
 
   const progressBar = 60;
-
-  const isMobile = useIsMobile();
-
+  
   return (
     <div className={styles.homeWrapper}>
       <Header />
