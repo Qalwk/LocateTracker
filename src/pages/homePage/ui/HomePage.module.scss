@@ -15,9 +15,9 @@
   flex-direction: column;
 }
 
-.hide {
-  display: none !important;
-}
+// .hide {
+//   display: none !important;
+// }
 
 .flight {
   margin-left: $space-6;
@@ -26,6 +26,10 @@
   gap: $space-2;
   width: $width-sm;
   margin-top: $space-24;
+}
+
+.hide {
+  display: flex;
 }
 
 .flightParams {
@@ -122,6 +126,11 @@ input {
     width: 100%;
     margin-left: 0;
   }
+
+  .hide {
+    display: none; 
+  }
+
   .filtersWrap {
     flex-direction: row;
     flex-wrap: wrap;

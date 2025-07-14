@@ -27,10 +27,10 @@ export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
-  const [flightId, setFlightId] = useState<string>('');
-  const [flightCompany, setFlightCompany] = useState<string>('');
-  const [flightFrom, setFlightFrom] = useState<string>('');
-  const [flightTo, setFlightTo] = useState<string>('');
+  const [flightId, setFlightId] = useState('');
+  const [flightCompany, setFlightCompany] = useState('');
+  const [flightFrom, setFlightFrom] = useState('');
+  const [flightTo, setFlightTo] = useState('');
 
   const location = useLocation();
 
@@ -93,9 +93,7 @@ export function HomePage() {
       <Header />
       <div className={styles.homePageContainer}>
         <div
-          className={clsx(styles.flight, {
-            [styles.hide]: isMobile && selectedFlight,
-          })}
+          className={clsx(styles.flight, { [styles.hide]: selectedFlight })}
         >
           <div className={styles.flightParams}>
             <FlightTabs isFavorite={isFavorite} />
