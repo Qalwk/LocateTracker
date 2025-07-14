@@ -1,6 +1,8 @@
-import { type Flight } from "shared/mocks/FlightsData"
-import styles from './FlightDetails.module.scss'
-import { FlightScheduleRow } from "entities/Flight/ui/FlightScheduleRow"
+import { FlightScheduleRow } from 'entities/Flight/ui/FlightScheduleRow';
+
+import { type Flight } from 'shared/mocks/FlightsData';
+
+import styles from './FlightDetails.module.scss';
 
 export function FlightDetailsSchedule({ flight }: { flight: Flight }) {
   return (
@@ -18,5 +20,5 @@ export function FlightDetailsSchedule({ flight }: { flight: Flight }) {
         rightValue={flight.to.estimated || ''}
       />
     </div>
-  )
-} 
+  );
+}

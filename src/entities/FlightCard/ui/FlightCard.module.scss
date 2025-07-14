@@ -2,20 +2,24 @@
   box-sizing: border-box;
   border: 3px solid transparent;
   border-radius: $radius-lg;
-  background: linear-gradient(var(--color-default), var(--color-default)) padding-box;
+  background: linear-gradient(var(--color-default), var(--color-default))
+    padding-box;
   color: var(--color-white);
   padding: $space-6;
   display: flex;
   flex-direction: column;
   font-size: $font-size-base;
   box-shadow: $shadow-main;
-  transition: background 1s, box-shadow 1s;
+  transition:
+    background 1s,
+    box-shadow 1s;
 
   &:hover,
   &.active {
     background:
       linear-gradient(var(--color-default), var(--color-default)) padding-box,
-      linear-gradient(90deg, var(--color-accent), #ff6a00, var(--color-accent)) border-box;
+      linear-gradient(90deg, var(--color-accent), #ff6a00, var(--color-accent))
+        border-box;
   }
 }
 

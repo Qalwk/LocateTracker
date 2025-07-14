@@ -1,1 +1,1 @@
-export { FlightTablePage } from "./ui/FlightTablePage"
+export { FlightTablePage } from './ui/FlightTablePage';

@@ -9,7 +9,8 @@
   color: var(--color-text);
   box-sizing: border-box;
   padding: $space-3;
-  background: linear-gradient(var(--color-default), var(--color-default)) padding-box;
+  background: linear-gradient(var(--color-default), var(--color-default))
+    padding-box;
   box-shadow: $shadow-main;
   margin-top: $space-24;
 }
@@ -199,7 +200,12 @@
   top: 0;
   height: 100%;
   border-radius: 3px 0 0 3px;
-  background: linear-gradient(90deg, #ff4e50 0%, var(--color-accent) 50%, #ff6a00 100%);
+  background: linear-gradient(
+    90deg,
+    #ff4e50 0%,
+    var(--color-accent) 50%,
+    #ff6a00 100%
+  );
   z-index: 1;
 }
 
@@ -241,7 +247,7 @@
     gap: $space-5;
     padding-bottom: $space-3;
   }
-  
+
   .infoTechText {
     text-align: center;
   }
@@ -254,4 +260,3 @@
     padding: $space-5 $space-5;
   }
 }
-

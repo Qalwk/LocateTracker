@@ -1,104 +1,104 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
-import react from 'eslint-plugin-react';
-import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import react from "eslint-plugin-react";
+import reactRecommended from "eslint-plugin-react/configs/recommended.js";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
   reactRecommended,
 
   {
-    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    files: ["**/*.{js,mjs,cjs,ts,tsx}"],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
+        ecmaVersion: "latest",
+        sourceType: "module",
         ecmaFeatures: {
           jsx: true,
         },
-        project: './tsconfig.eslint.json',
+        project: "./tsconfig.eslint.json",
       },
       globals: globals.browser,
     },
     plugins: {
       js,
       react,
-      '@typescript-eslint': tseslint.plugin,
-      'simple-import-sort': simpleImportSort,
+      "@typescript-eslint": tseslint.plugin,
+      "simple-import-sort": simpleImportSort,
     },
     rules: {
-      'no-console': 'error',
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-max-props-per-line': [1, { maximum: 1, when: 'always' }],
+      "no-console": "error",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-max-props-per-line": [1, { maximum: 1, when: "always" }],
 
       // Сортировка импортов
-      'simple-import-sort/imports': [
-        'error',
+      "simple-import-sort/imports": [
+        "error",
         {
           groups: [
             // 1. Внешние библиотеки
-            ['^react$', '^react-dom$', '^[a-z]'],
+            ["^react$", "^react-dom$", "^[a-z]"],
 
             // 2. Стандартные хуки React
-            ['^react', '^use[A-Z]'],
+            ["^react", "^use[A-Z]"],
 
             // 3. Компоненты (все алиасы на компоненты и layout)
             [
-              '^@components/',
-              '^@layout/',
-              '^@app-layout/',
-              '^@app-header/',
-              '^@app-footer/',
-              '^@app-ui/',
+              "^@components/",
+              "^@layout/",
+              "^@app-layout/",
+              "^@app-header/",
+              "^@app-footer/",
+              "^@app-ui/",
             ],
 
             // 4. Кастомные хуки
-            ['^@hooks/'],
+            ["^@hooks/"],
 
             // 5. Страницы
-            ['^@pages/'],
+            ["^@pages/"],
 
             // 6. Redux store, slice, reducer, namespace
-            ['^@store/', '^@namespace/', '^@reducer/', '^@slice/'],
+            ["^@store/", "^@namespace/", "^@reducer/", "^@slice/"],
 
             // 7. Сервисы и API
-            ['^@service/', '^@api/'],
+            ["^@service/", "^@api/"],
 
             // 8. Прочее (utils, route-path, app и относительные пути)
             [
-              '^@utils/',
-              '^@app/',
-              '^\\.\\.(?!/?$)',
-              '^\\./(?=.*/)(?!/?$)',
-              '^\\.(?!/?$)',
-              '^\\./?$',
+              "^@utils/",
+              "^@app/",
+              "^\\.\\.(?!/?$)",
+              "^\\./(?=.*/)(?!/?$)",
+              "^\\.(?!/?$)",
+              "^\\./?$",
             ],
           ],
         },
       ],
-      'simple-import-sort/exports': 'error',
+      "simple-import-sort/exports": "error",
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
     },
   },
 
   {
-    files: ['**/*.js'],
+    files: ["**/*.js"],
     languageOptions: {
-      sourceType: 'script',
+      sourceType: "script",
     },
   },
 
   globalIgnores([
-    '**/node_modules/',
-    '**/dist/',
-    '.commitlint.config.cjs',
-    'eslint.config.js',
+    "**/node_modules/",
+    "**/dist/",
+    ".commitlint.config.cjs",
+    "eslint.config.js",
   ]),
 ]);

@@ -6,3 +6,16 @@ bracketSameLine: false
 jsxSingleQuote: false
 jsxBracketSameLine: false
 singleAttributePerLine: true
+
+importOrder:
+  - "^react"
+  - "^redux"
+  - "^features/(.*)$"
+  - "^widgets/(.*)$"
+  - "^entities/(.*)$"
+  - "^shared/(.*)$"
+  - "^[./]"
+importOrderSeparation: true
+importOrderSortSpecifiers: true
+plugins:
+  - "@trivago/prettier-plugin-sort-imports"

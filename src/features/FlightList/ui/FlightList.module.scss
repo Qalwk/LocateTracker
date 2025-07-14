@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: $space-2;
 
-    /* Для Chrome, Edge, Safari */
+  /* Для Chrome, Edge, Safari */
   &::-webkit-scrollbar {
     display: none;
   }
@@ -20,7 +20,7 @@
 
 .skeleton {
   background-color: var(--color-default);
-  color: var(--color-default);  
+  color: var(--color-default);
   width: $width-xs;
   height: 120px;
 }

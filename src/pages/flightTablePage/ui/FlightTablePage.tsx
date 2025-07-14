@@ -1,7 +1,8 @@
-import { FlightTable } from "entities/Flight/ui/FlightTable";
-import { Header } from "widgets/Header";
-import styles from "./FlightTablePage.module.scss"
+import { Header } from 'widgets/Header';
 
+import { FlightTable } from 'entities/Flight/ui/FlightTable';
+
+import styles from './FlightTablePage.module.scss';
 
 export function FlightTablePage() {
   return (
@@ -11,5 +12,5 @@ export function FlightTablePage() {
         <FlightTable />
       </div>
     </div>
-  )
+  );
 }

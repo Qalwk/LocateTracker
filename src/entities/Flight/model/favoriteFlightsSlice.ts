@@ -20,7 +20,7 @@ export const favoriteFlightsSlice = createSlice({
       }
     },
     removeFavorite: (state, action: PayloadAction<string>) => {
-      state.ids = state.ids.filter(id => id !== action.payload);
+      state.ids = state.ids.filter((id) => id !== action.payload);
     },
   },
 });

@@ -1,6 +1,5 @@
-
 // Шрифты
-$font-main: 'JetBrains Mono', 'JetBrains', Arial, sans-serif;
+$font-main: "JetBrains Mono", "JetBrains", Arial, sans-serif;
 $font-weight-thin: 100;
 $font-weight-extralight: 200;
 $font-weight-light: 300;
@@ -39,74 +38,74 @@ $letter-spacing-widest: 0.1em;
 
 // Скругления (rem)
 $radius-sm: 0.375rem; // 6px
-$radius-md: 0.5rem;   // 8px
-$radius-lg: 1rem;     // 16px
+$radius-md: 0.5rem; // 8px
+$radius-lg: 1rem; // 16px
 
 // Тени
-$shadow-main: 0 0.125rem 0.5rem rgba(0,0,0,0.10); // 0 2px 8px
+$shadow-main: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); // 0 2px 8px
 
 // Шкала отступов (spacing scale, rem)
 $space-0: 0rem;
 $space-1: 0.25rem; // 4px
-$space-2: 0.5rem;  // 8px
+$space-2: 0.5rem; // 8px
 $space-3: 0.75rem; // 12px
-$space-4: 1rem;    // 16px
+$space-4: 1rem; // 16px
 $space-5: 1.25rem; // 20px
-$space-6: 1.5rem;  // 24px
-$space-8: 2rem;    // 32px
+$space-6: 1.5rem; // 24px
+$space-8: 2rem; // 32px
 $space-10: 2.5rem; // 40px
-$space-12: 3rem;   // 48px
-$space-16: 4rem;   // 64px
-$space-20: 5rem;   // 80px
-$space-24: 6rem;   // 96px
-$space-32: 8rem;   // 128px
-$space-40: 10rem;  // 160px
-$space-48: 12rem;  // 192px
-$space-56: 14rem;  // 224px
-$space-64: 16rem;  // 256px
+$space-12: 3rem; // 48px
+$space-16: 4rem; // 64px
+$space-20: 5rem; // 80px
+$space-24: 6rem; // 96px
+$space-32: 8rem; // 128px
+$space-40: 10rem; // 160px
+$space-48: 12rem; // 192px
+$space-56: 14rem; // 224px
+$space-64: 16rem; // 256px
 
 // Размеры (width/height, rem)
-$size-xs: 20rem;   // 320px
-$size-sm: 24rem;   // 384px
-$size-md: 28rem;   // 448px
-$size-lg: 32rem;   // 512px
-$size-xl: 36rem;   // 576px
-$size-2xl: 42rem;  // 672px
-$size-3xl: 48rem;  // 768px
-$size-4xl: 56rem;  // 896px
-$size-5xl: 64rem;  // 1024px
-$size-6xl: 72rem;  // 1152px
-$size-7xl: 80rem;  // 1280px
+$size-xs: 20rem; // 320px
+$size-sm: 24rem; // 384px
+$size-md: 28rem; // 448px
+$size-lg: 32rem; // 512px
+$size-xl: 36rem; // 576px
+$size-2xl: 42rem; // 672px
+$size-3xl: 48rem; // 768px
+$size-4xl: 56rem; // 896px
+$size-5xl: 64rem; // 1024px
+$size-6xl: 72rem; // 1152px
+$size-7xl: 80rem; // 1280px
 
 // Брейкпоинты (rem)
-$breakpoint-sm: 40rem;  // 640px
-$breakpoint-md: 48rem;  // 768px
-$breakpoint-lg: 64rem;  // 1024px
-$breakpoint-xl: 80rem;  // 1280px
+$breakpoint-sm: 40rem; // 640px
+$breakpoint-md: 48rem; // 768px
+$breakpoint-lg: 64rem; // 1024px
+$breakpoint-xl: 80rem; // 1280px
 $breakpoint-2xl: 96rem; // 1536px
 
 // Дефолтные значения ширины (width)
-$width-xs: 20rem;   // 320px
-$width-sm: 24rem;   // 384px
-$width-md: 28rem;   // 448px
-$width-lg: 32rem;   // 512px
-$width-xl: 36rem;   // 576px
-$width-2xl: 42rem;  // 672px
-$width-3xl: 48rem;  // 768px
-$width-4xl: 56rem;  // 896px
-$width-5xl: 64rem;  // 1024px
-$width-6xl: 72rem;  // 1152px
-$width-7xl: 80rem;  // 1280px
+$width-xs: 20rem; // 320px
+$width-sm: 24rem; // 384px
+$width-md: 28rem; // 448px
+$width-lg: 32rem; // 512px
+$width-xl: 36rem; // 576px
+$width-2xl: 42rem; // 672px
+$width-3xl: 48rem; // 768px
+$width-4xl: 56rem; // 896px
+$width-5xl: 64rem; // 1024px
+$width-6xl: 72rem; // 1152px
+$width-7xl: 80rem; // 1280px
 
 // Дефолтные значения высоты (height)
-$height-xs: 20rem;   // 320px
-$height-sm: 24rem;   // 384px
-$height-md: 28rem;   // 448px
-$height-lg: 32rem;   // 512px
-$height-xl: 36rem;   // 576px
-$height-2xl: 42rem;  // 672px
-$height-3xl: 48rem;  // 768px
-$height-4xl: 56rem;  // 896px
-$height-5xl: 64rem;  // 1024px
-$height-6xl: 72rem;  // 1152px
-$height-7xl: 80rem;  // 1280px
+$height-xs: 20rem; // 320px
+$height-sm: 24rem; // 384px
+$height-md: 28rem; // 448px
+$height-lg: 32rem; // 512px
+$height-xl: 36rem; // 576px
+$height-2xl: 42rem; // 672px
+$height-3xl: 48rem; // 768px
+$height-4xl: 56rem; // 896px
+$height-5xl: 64rem; // 1024px
+$height-6xl: 72rem; // 1152px
+$height-7xl: 80rem; // 1280px

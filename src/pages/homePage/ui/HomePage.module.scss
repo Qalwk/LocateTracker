@@ -23,7 +23,7 @@
   margin-left: $space-6;
   display: flex;
   flex-direction: column;
-  gap: $space-2;;
+  gap: $space-2;
   width: $width-sm;
   margin-top: $space-24;
 }
@@ -31,7 +31,7 @@
 .flightParams {
   display: flex;
   flex-direction: column;
-  gap: $space-2;;
+  gap: $space-2;
 }
 
 .btnWrap {
@@ -89,13 +89,15 @@ input {
     flex-direction: row;
     gap: 1rem;
   }
-  .flight { width: 45%; }
+  .flight {
+    width: 45%;
+  }
   .filtersWrap {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10%;
   }
-  
+
   .filter {
     width: 40%;
   }
@@ -116,8 +118,8 @@ input {
     gap: 1rem;
     min-height: 100vh;
   }
-  .flight { 
-    width: 100%; 
+  .flight {
+    width: 100%;
     margin-left: 0;
   }
   .filtersWrap {
@@ -126,7 +128,7 @@ input {
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .filter {
     width: 45%;
   }

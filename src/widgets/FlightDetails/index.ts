@@ -1,1 +1,1 @@
-export {FlightDetails} from "./ui/FlightDetails"
+export { FlightDetails } from './ui/FlightDetails';

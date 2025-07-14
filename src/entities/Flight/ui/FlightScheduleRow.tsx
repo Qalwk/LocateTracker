@@ -1,6 +1,16 @@
 import styles from './Flight.module.scss';
 
-export function FlightScheduleRow({ leftLabel, leftValue, rightLabel, rightValue }: { leftLabel: string, leftValue: string, rightLabel: string, rightValue: string }) {
+export function FlightScheduleRow({
+  leftLabel,
+  leftValue,
+  rightLabel,
+  rightValue,
+}: {
+  leftLabel: string;
+  leftValue: string;
+  rightLabel: string;
+  rightValue: string;
+}) {
   return (
     <div className={styles.scheduleRow}>
       <div className={styles.scheduleGroup}>
@@ -13,4 +23,4 @@ export function FlightScheduleRow({ leftLabel, leftValue, rightLabel, rightValue
       </div>
     </div>
   );
-} 
+}

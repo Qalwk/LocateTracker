@@ -1,5 +1,6 @@
-import { useAuth } from "shared/model/auth/model/authContext";
-import { Navigate } from "react-router";
+import { Navigate } from 'react-router';
+
+import { useAuth } from 'shared/model/auth/model/authContext';
 
 export function RedirectIfAuth({ children }: { children: React.ReactNode }) {
   const { isAuth } = useAuth();

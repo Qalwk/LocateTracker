@@ -1,13 +1,14 @@
 import clsx from 'clsx';
-import styles from './HomePage.module.scss';
+
 import { useNavigate } from 'react-router';
+
+import styles from './HomePage.module.scss';
 
 interface FlightTabsProps {
   isFavorite: boolean | null;
 }
 
 export function FlightTabs({ isFavorite }: FlightTabsProps) {
-
   const navigate = useNavigate();
 
   const handleAllClick = () => navigate('/');
@@ -15,30 +16,24 @@ export function FlightTabs({ isFavorite }: FlightTabsProps) {
 
   return (
     <div className={styles.btnWrap}>
-      <button 
+      <button
         onClick={handleAllClick}
-        className={clsx(
-          styles.buttonFilter, 
-          { 
-            [styles.buttonFilterActive]: !isFavorite,
-            [styles.buttonText]: !isFavorite
-          }
-        )}
+        className={clsx(styles.buttonFilter, {
+          [styles.buttonFilterActive]: !isFavorite,
+          [styles.buttonText]: !isFavorite,
+        })}
       >
         All
       </button>
-      <button 
+      <button
         onClick={handleFavoritesClick}
-        className={clsx(
-          styles.buttonFilter, 
-          { 
-            [styles.buttonFilterActive]: isFavorite,
-            [styles.buttonText]: isFavorite
-          }
-        )}
+        className={clsx(styles.buttonFilter, {
+          [styles.buttonFilterActive]: isFavorite,
+          [styles.buttonText]: isFavorite,
+        })}
       >
         Favorites
       </button>
     </div>
-  )
+  );
 }

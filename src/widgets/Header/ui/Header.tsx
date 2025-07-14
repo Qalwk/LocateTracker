@@ -1,20 +1,25 @@
-import { LogOut, Palette } from "lucide-react"
-import styles from "./Header.module.scss"
-import { useSelector, useDispatch } from 'react-redux';
-import { setTheme, toggleTheme } from 'shared/model/themeSlice';
 import type { RootState } from 'app/store';
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
-import { useAuth } from "shared/model/auth/model/authContext";
-export function Header() {
+import { LogOut, Palette } from 'lucide-react';
 
-  const currentTheme = useSelector((state: RootState) => state.theme.currentTheme);
-  const dispatch = useDispatch()
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
+import { useAuth } from 'shared/model/auth/model/authContext';
+import { setTheme, toggleTheme } from 'shared/model/themeSlice';
+
+import styles from './Header.module.scss';
+
+export function Header() {
+  const currentTheme = useSelector(
+    (state: RootState) => state.theme.currentTheme,
+  );
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const handleHomeLink = () => navigate('/')
-  const handleTableLink = () => navigate('/flight-table')
+  const handleHomeLink = () => navigate('/');
+  const handleTableLink = () => navigate('/flight-table');
 
   const { logout } = useAuth();
 
@@ -25,7 +30,7 @@ export function Header() {
       document.body.classList.remove('dark');
     }
   }, [currentTheme]);
-  
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('Theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -36,23 +41,29 @@ export function Header() {
   useEffect(() => {
     localStorage.setItem('Theme', currentTheme);
   }, [currentTheme]);
-  
+
   return (
     <div className={styles.header}>
-        <div onClick={handleHomeLink}>
-          <p>LOGO</p>
+      <div onClick={handleHomeLink}>
+        <p>LOGO</p>
+      </div>
+      <div className={styles.btnWrap}>
+        <div onClick={handleTableLink}>
+          <p>Flight Table</p>
         </div>
-        <div className={styles.btnWrap}>
-          <div onClick={handleTableLink}>
-            <p>Flight Table</p>
-          </div>
-          <button onClick={() => dispatch(toggleTheme())} className={styles.theme}>
-            <Palette color="var(--color-text)"/>
-          </button>
-          <button onClick={logout} className={styles.theme}>
-            <LogOut color="var(--color-text)"/>
-          </button>
-        </div>
+        <button
+          onClick={() => dispatch(toggleTheme())}
+          className={styles.theme}
+        >
+          <Palette color="var(--color-text)" />
+        </button>
+        <button
+          onClick={logout}
+          className={styles.theme}
+        >
+          <LogOut color="var(--color-text)" />
+        </button>
+      </div>
     </div>
-  )
+  );
 }

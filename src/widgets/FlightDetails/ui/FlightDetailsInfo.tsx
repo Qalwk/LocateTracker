@@ -1,6 +1,8 @@
-import { FlightInfoRow } from "entities/Flight/ui/FlightInfoRow"
-import { type Flight } from "shared/mocks/FlightsData"
-import styles from './FlightDetails.module.scss'
+import { FlightInfoRow } from 'entities/Flight/ui/FlightInfoRow';
+
+import { type Flight } from 'shared/mocks/FlightsData';
+
+import styles from './FlightDetails.module.scss';
 
 export function FlightDetailsInfo({ flight }: { flight: Flight }) {
   return (
@@ -19,5 +21,5 @@ export function FlightDetailsInfo({ flight }: { flight: Flight }) {
         rightValue={flight.altitude || ''}
       />
     </div>
-  )
-} 
+  );
+}

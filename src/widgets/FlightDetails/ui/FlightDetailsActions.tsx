@@ -1,4 +1,4 @@
-import styles from './FlightDetails.module.scss'
+import styles from './FlightDetails.module.scss';
 
 export function FlightDetailsActions() {
   return (
@@ -8,5 +8,5 @@ export function FlightDetailsActions() {
       <button className={styles.actionButton}>Share</button>
       <button className={styles.actionButton}>More</button>
     </div>
-  )
-} 
+  );
+}

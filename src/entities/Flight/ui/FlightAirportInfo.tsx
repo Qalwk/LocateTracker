@@ -1,6 +1,14 @@
 import styles from './Flight.module.scss';
 
-export function FlightAirportInfo({ iata, city, utc }: { iata: string, city: string, utc: string }) {
+export function FlightAirportInfo({
+  iata,
+  city,
+  utc,
+}: {
+  iata: string;
+  city: string;
+  utc: string;
+}) {
   return (
     <div className={styles.airportInfo}>
       <span className={styles.airportCode}>{iata}</span>
@@ -8,4 +16,4 @@ export function FlightAirportInfo({ iata, city, utc }: { iata: string, city: str
       <span className={styles.airportUtc}>{utc}</span>
     </div>
   );
-} 
+}

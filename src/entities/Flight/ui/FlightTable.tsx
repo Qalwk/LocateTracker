@@ -3,10 +3,11 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  getPaginationRowModel
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
+import type { SortingState } from '@tanstack/react-table';
 import {
   ArrowUpDown,
   ChevronLeft,
@@ -17,45 +18,66 @@ import {
   Phone,
   Search,
   User,
-} from "lucide-react";
-import { useState } from "react";
-import { flightsData } from "shared/mocks/FlightsData";
-import type { SortingState } from "@tanstack/react-table";
-import type { Flight } from "shared/mocks/FlightsData";
-import styles from "./FlightTable.module.scss";
+} from 'lucide-react';
+
+import { useState } from 'react';
+
+import { flightsData } from 'shared/mocks/FlightsData';
+import type { Flight } from 'shared/mocks/FlightsData';
+
+import styles from './FlightTable.module.scss';
 
 const columnHelper = createColumnHelper<Flight>();
 
 const columns = [
-  columnHelper.accessor("id", {
+  columnHelper.accessor('id', {
     cell: (info) => info.getValue(),
     header: () => (
       <span className="flex items-center">
-        <User className="mr-2" size={16} /> ID
+        <User
+          className="mr-2"
+          size={16}
+        />{' '}
+        ID
       </span>
     ),
   }),
-  columnHelper.accessor("airline", {
+  columnHelper.accessor('airline', {
     cell: (info) => info.getValue(),
     header: () => (
       <span className="flex items-center">
-        <User className="mr-2" size={16} /> Airline
+        <User
+          className="mr-2"
+          size={16}
+        />{' '}
+        Airline
       </span>
     ),
   }),
-  columnHelper.accessor("codes", {
-    cell: (info) => Array.isArray(info.getValue()) ? info.getValue().join(", ") : info.getValue(),
+  columnHelper.accessor('codes', {
+    cell: (info) =>
+      Array.isArray(info.getValue())
+        ? info.getValue().join(', ')
+        : info.getValue(),
     header: () => (
       <span className="flex items-center">
-        <Mail className="mr-2" size={16} /> Codes
+        <Mail
+          className="mr-2"
+          size={16}
+        />{' '}
+        Codes
       </span>
     ),
   }),
-  columnHelper.accessor("speed", {
+  columnHelper.accessor('speed', {
     cell: (info) => info.getValue(),
     header: () => (
       <span className="flex items-center">
-        <Phone className="mr-2" size={16} /> Speed
+        <Phone
+          className="mr-2"
+          size={16}
+        />{' '}
+        Speed
       </span>
     ),
   }),
@@ -64,7 +86,7 @@ const columns = [
 export function FlightTable() {
   const [tableData] = useState<Flight[]>(() => [...flightsData]);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable<Flight>({
     data: tableData,
@@ -92,13 +114,16 @@ export function FlightTable() {
     <div className={styles.flightTableWrapper}>
       <div className={styles.searchBlock}>
         <input
-          value={globalFilter ?? ""}
+          value={globalFilter ?? ''}
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
           className={styles.searchInput}
         />
         <div className={styles.searchIcon}>
-          <Search className={styles.searchIcon} size={20} />
+          <Search
+            className={styles.searchIcon}
+            size={20}
+          />
         </div>
       </div>
 
@@ -106,7 +131,10 @@ export function FlightTable() {
         <table className={styles.table}>
           <thead className={styles.thead}>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} className={styles.tr}>
+              <tr
+                key={headerGroup.id}
+                className={styles.tr}
+              >
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
@@ -116,15 +144,18 @@ export function FlightTable() {
                       {...{
                         className: header.column.getCanSort()
                           ? styles.sortableHeader
-                          : "",
+                          : '',
                         onClick: header.column.getToggleSortingHandler(),
                       }}
                     >
                       {flexRender(
                         header.column.columnDef.header,
-                        header.getContext()
+                        header.getContext(),
                       )}
-                      <ArrowUpDown className={styles.sortIcon} size={16} />
+                      <ArrowUpDown
+                        className={styles.sortIcon}
+                        size={16}
+                      />
                     </div>
                   </th>
                 ))}
@@ -133,7 +164,10 @@ export function FlightTable() {
           </thead>
           <tbody className={styles.tbody}>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className={styles.trHover}>
+              <tr
+                key={row.id}
+                className={styles.trHover}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
@@ -159,7 +193,10 @@ export function FlightTable() {
             }}
           >
             {[5, 10, 20, 30].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
+              <option
+                key={pageSize}
+                value={pageSize}
+              >
                 {pageSize}
               </option>
             ))}
