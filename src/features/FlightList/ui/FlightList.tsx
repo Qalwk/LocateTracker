@@ -1,5 +1,5 @@
 import { type Flight } from "shared/mocks/FlightsData"
-import { FlightCard } from "widgets/FlightCard/ui/FlightCard"
+import { FlightCard } from "entities/FlightCard/ui/FlightCard"
 import styles from './FlightList.module.scss'
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";

@@ -4,6 +4,7 @@ import { HomePage } from 'pages/homePage'
 import { LoginPage } from 'pages/loginPage'
 import { ProtectedRoute } from 'shared/ui/ProtectedRoute'
 import { RedirectIfAuth } from 'shared/ui/RedirectIfAuth'
+import { FlightTablePage } from 'pages/flightTablePage'
 
 export function AppRouter() {
   return (
@@ -32,6 +33,11 @@ export function AppRouter() {
         <Route path="/favorites/:airline/:route" element={
           <ProtectedRoute>
             <HomePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/flight-table" element={
+          <ProtectedRoute>
+            <FlightTablePage />
           </ProtectedRoute>
         } />
         <Route path="*" element={

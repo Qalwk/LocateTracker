@@ -14,6 +14,7 @@ export function Header() {
   const navigate = useNavigate();
 
   const handleHomeLink = () => navigate('/')
+  const handleTableLink = () => navigate('/flight-table')
 
   const { logout } = useAuth();
 
@@ -42,6 +43,9 @@ export function Header() {
           <p>LOGO</p>
         </div>
         <div className={styles.btnWrap}>
+          <div onClick={handleTableLink}>
+            <p>Flight Table</p>
+          </div>
           <button onClick={() => dispatch(toggleTheme())} className={styles.theme}>
             <Palette color="var(--color-text)"/>
           </button>
