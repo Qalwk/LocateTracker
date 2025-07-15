@@ -21,6 +21,7 @@ import { flightsData } from 'shared/mocks/FlightsData';
 import { FlightFilters } from '../../../features/FlightFilters/ui/FlightFilters';
 import { FlightTabs } from './FlightTabs';
 import styles from './HomePage.module.scss';
+import { Map } from 'entities/Map/ui/Map';
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
@@ -119,6 +120,9 @@ export function HomePage() {
           flight={selectedFlight}
           onClose={() => setSelectedFlight(null)}
         />
+      </div>
+      <div className={styles.mapContainer}>
+        <Map />
       </div>
     </div>
   );

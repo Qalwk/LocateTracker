@@ -26,6 +26,7 @@
   gap: $space-2;
   width: $width-sm;
   margin-top: $space-24;
+  z-index: 1;
 }
 
 .hide {
@@ -85,6 +86,16 @@ input {
 
 .buttonText {
   color: var(--color-default);
+}
+
+.mapContainer {
+  flex-grow: 1;
+  min-width: 400px;
+  min-height: 400px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 0
 }
 
 // Планшет
