@@ -1,0 +1,148 @@
+.homePageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.homeWrapper {
+  // padding-top: 72px;
+  position: relative;
+  height: 100vh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+}
+
+// .hide {
+//   display: none !important;
+// }
+
+.flight {
+  margin-left: $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  width: $width-sm;
+  margin-top: $space-24;
+}
+
+.hide {
+  display: flex;
+}
+
+.flightParams {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.btnWrap {
+  display: flex;
+  flex-direction: row;
+  gap: $space-3;
+}
+
+.buttonFilter {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  width: 50%;
+}
+
+.buttonFilterActive {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.filtersWrap {
+  display: flex;
+  flex-direction: row;
+  gap: 3%;
+  background-color: var(--color-accent);
+  padding: $space-2 $space-6;
+  border-radius: $radius-lg;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  width: 23%;
+  gap: $space-1;
+}
+
+input {
+  border-radius: $radius-lg;
+  padding-left: $space-1;
+  font-size: $font-size-sm;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.filter label {
+  color: var(--color-default);
+}
+
+.buttonText {
+  color: var(--color-default);
+}
+
+// Планшет
+@media (min-width: 760px) and (max-width: 1023px) {
+  .homePageContainer {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .flight {
+    width: 45%;
+  }
+  .filtersWrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10%;
+  }
+
+  .filter {
+    width: 40%;
+  }
+}
+
+// Мобильные устройства
+@media (max-width: 759px) {
+  .homeWrapper {
+    min-height: 100vh;
+    width: 100dvw;
+  }
+
+  .homePageContainer {
+    position: relative;
+    overflow: visible;
+    flex-direction: row;
+    margin: 0px 24px;
+    gap: 1rem;
+    min-height: 100vh;
+  }
+  .flight {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .hide {
+    display: none; 
+  }
+
+  .filtersWrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .filter {
+    width: 45%;
+  }
+
+  .filter label {
+    font-size: $font-size-sm;
+  }
+}

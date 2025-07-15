@@ -15,11 +15,10 @@ import {
   removeFavorite,
 } from 'entities/Flight/model/favoriteFlightsSlice';
 
-import { useIsMobile } from 'shared/hooks/useIsMobile';
 import { type Flight } from 'shared/mocks/FlightsData';
 import { flightsData } from 'shared/mocks/FlightsData';
 
-import { FlightFilters } from './FlightFilters';
+import { FlightFilters } from '../../../features/FlightFilters/ui/FlightFilters';
 import { FlightTabs } from './FlightTabs';
 import styles from './HomePage.module.scss';
 
@@ -48,7 +47,7 @@ export function HomePage() {
   const dispatch = useDispatch();
 
   const baseFlights =
-    isFavorite === true
+    !!isFavorite
       ? flightsData.filter((flight) => favorites.includes(flight.id))
       : flightsData;
 
@@ -85,7 +84,7 @@ export function HomePage() {
   }, [favorites]);
 
   const progressBar = 60;
-  
+
   return (
     <div className={styles.homeWrapper}>
       <Header />

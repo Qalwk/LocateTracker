@@ -18,6 +18,10 @@ interface FlightCardProps {
   progress: number;
 }
 
+function slugify(str: string) {
+  return str.toLowerCase().replace(/\s+/g, '-');
+}
+
 export function FlightCard({
   flight,
   onClick,
@@ -28,10 +32,6 @@ export function FlightCard({
 }: FlightCardProps) {
   const navigate = useNavigate();
   const location = useLocation();
-
-  function slugify(str: string) {
-    return str.toLowerCase().replace(/\s+/g, '-');
-  }
 
   const handleLinked = () => {
     const airline = slugify(flight.airline);
