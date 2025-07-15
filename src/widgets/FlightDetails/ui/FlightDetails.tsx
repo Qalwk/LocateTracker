@@ -10,6 +10,7 @@ import { FlightDetailsSchedule } from './FlightDetailsSchedule';
 
 import { AnimatePresence, m } from "framer-motion"
 
+
 export function FlightDetails({
   flight,
   onClose,
