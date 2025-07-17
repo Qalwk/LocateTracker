@@ -28,17 +28,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   async function refreshAccessToken() {
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (!refreshToken) return false;
     const res = await fetch('http://localhost:3001/api/refresh', {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refreshToken }),
     });
     if (res.ok) {
       const data = await res.json();
       localStorage.setItem('accessToken', data.accessToken);
       setIsAuth(true);
+      console.log('new accessToken', data.accessToken);
       return true;
     } else {
       logout();
@@ -66,15 +65,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) setIsAuth(true);
   }, []);
 
-  const login = (accessToken: string, refreshToken: string) => {
+  const login = (accessToken: string) => {
     localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
+    // localStorage.setItem('refreshToken', refreshToken);
     setIsAuth(true);
   };
 
   const logout = () => {
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
     setIsAuth(false);
   };
 

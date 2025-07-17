@@ -5,14 +5,32 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
+
+const FRONTEND_ORIGIN = 'http://localhost:5174';
+
+app.use(cors({
+  origin: FRONTEND_ORIGIN,
+  credentials: true
+}));
+
+// Явно обрабатываем preflight-запросы для CORS
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', FRONTEND_ORIGIN);
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);
+});
+
 app.use(express.json());
+app.use(cookieParser());
 
 const flightsPath = path.join(__dirname, 'data', 'flights.json');
 const usersPath = path.join(__dirname, 'data', 'users.json');
@@ -50,18 +68,24 @@ app.post('/api/login', (req, res) => {
     };
     const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1m' });
     const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '30d' });
-    res.json({ accessToken, refreshToken, username: user.username, email: user.email });
+    res
+      .cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: false, // true только для https
+        sameSite: 'strict',
+        maxAge: 30 * 24 * 60 * 60 * 1000 // 30 дней
+      })
+      .json({ accessToken, username: user.username, email: user.email });
   } else {
     res.status(401).json({ error: 'Неверный email или пароль' });
   }
 });
 
 app.post('/api/refresh', (req, res) => {
-  const { refreshToken } = req.body;
+  const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) return res.status(400).json({ error: 'No refresh token provided' });
   try {
     const payload = jwt.verify(refreshToken, JWT_SECRET);
-    // Можно добавить проверку отзыва refreshToken (например, хранить их в базе)
     const newAccessToken = jwt.sign({
       userId: payload.userId,
       email: payload.email,
