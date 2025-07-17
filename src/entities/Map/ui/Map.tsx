@@ -9,7 +9,7 @@ export function Map() {
   const mapContainer = useRef(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
 
-  const [center, setCenter] = useState<[number, number]>([37.6173, 55.7558])
+  const [center, setCenter] = useState<[number, number]>([37.6173, 55.7558]) // Москва
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -17,7 +17,7 @@ export function Map() {
     const map = new maplibregl.Map({
       container: mapContainer.current,
       style: "https://api.maptiler.com/maps/outdoor-v2/style.json?key=ktExOhjs6KluWthAGPqe", 
-      center: center, // Москва
+      center: center,
       zoom: 9,
     });
 

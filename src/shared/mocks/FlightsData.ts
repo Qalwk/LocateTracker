@@ -189,10 +189,10 @@ export const flightsData: Flight[] = [
     altitude: '12 000 m',
   },
   {
-    id: 'TK143',
+    id: 'TK142',
     airline: 'Turkish Airlines',
     airlineLogo: turkishAirlinesLogo,
-    flightNumber: 'TK143',
+    flightNumber: 'TK142',
     codes: ['93247', 'TC-JFP'],
     from: {
       city: 'Sofia',

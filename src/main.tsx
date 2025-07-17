@@ -4,7 +4,6 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { AuthProvider } from 'shared/model/auth/model/authContext';
 import { domAnimation, LazyMotion } from "framer-motion"
 
 import { AppRouter } from './app/routes';
@@ -14,9 +13,7 @@ createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <StrictMode>
       <LazyMotion features={domAnimation}>
-        <AuthProvider>
-            <AppRouter />
-        </AuthProvider>
+        <AppRouter />
       </LazyMotion>
     </StrictMode>
   </Provider>,

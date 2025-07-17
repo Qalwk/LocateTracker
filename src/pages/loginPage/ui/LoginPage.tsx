@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 
 import { formSchema } from 'features/auth/model/loginSchema';
 
-import { users } from 'shared/mocks/UserData';
+// import { users } from 'shared/mocks/UserData';
 import { useAuth } from 'shared/model/auth/model/authContext';
 
 import styles from './LoginPage.module.scss';
@@ -23,21 +23,20 @@ export function LoginPage() {
     setFocus,
   } = useForm<FormSchema>({ resolver: zodResolver(formSchema) });
 
-  const onSubmit = (data: FormSchema) => {
-    const foundUser = users.find(
-      (user) => user.email === data.email && user.password === data.password,
-    );
-
-    if (foundUser) {
-      // Здесь должен быть запрос к серверу и получение токена
-      login('demo-token'); // временно
+  const onSubmit = async (data: FormSchema) => {
+    const res = await fetch('http://localhost:3001/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (res.ok) {
+      login(result.accessToken, result.refreshToken);
       navigate('/');
     } else {
-      setError('password', {
-        type: 'manual',
-        message: 'Неверный email или пароль',
-      });
+      setError('password', { type: 'manual', message: result.error });
     }
+    console.log(result.accessToken, result.refreshToken);
   };
 
   useEffect(() => {
@@ -98,7 +97,7 @@ export function LoginPage() {
           type="button"
           className={styles.loginButton}
           onClick={() => {
-            login('demo-token');
+            login('demo-acces-token', 'demo-refresh-token');
             navigate('/');
           }}
         >

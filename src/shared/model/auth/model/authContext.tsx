@@ -1,29 +1,80 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router';
 
 interface AuthContextType {
   isAuth: boolean;
-  login: (token: string) => void;
+  login: (accessToken: string, refreshToken: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+function isTokenExpired(token: string) {
+  if (!token) return true;
+  try {
+    const { exp } = jwtDecode(token);
+    if (!exp) return true;
+    return Date.now() >= exp * 1000;
+  } catch {
+    return true;
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem('token'));
 
+  const navigate = useNavigate();
+
+  async function refreshAccessToken() {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) return false;
+    const res = await fetch('http://localhost:3001/api/refresh', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem('accessToken', data.accessToken);
+      setIsAuth(true);
+      return true;
+    } else {
+      logout();
+      return false;
+    }
+  }
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const checkToken = async () => {
+      const token = localStorage.getItem('accessToken');
+      if (!token || isTokenExpired(token)) {
+        // Пытаемся обновить accessToken
+        const refreshed = await refreshAccessToken();
+        if (!refreshed) {
+          logout();
+          navigate('/login');
+        }
+      }
+    };
+    checkToken();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
     if (token) setIsAuth(true);
   }, []);
 
-  const login = (token: string) => {
-    localStorage.setItem('token', token);
+  const login = (accessToken: string, refreshToken: string) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
     setIsAuth(true);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     setIsAuth(false);
   };
 
