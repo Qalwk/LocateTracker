@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-const FRONTEND_ORIGIN = 'http://localhost:5174';
+const FRONTEND_ORIGIN = 'http://localhost:5173';
 
 app.use(cors({
   origin: FRONTEND_ORIGIN,
@@ -95,6 +95,15 @@ app.post('/api/refresh', (req, res) => {
   } catch (e) {
     res.status(401).json({ error: 'Invalid refresh token' });
   }
+});
+
+app.post('/api/logout', (req, res) => {
+  res.clearCookie('refreshToken', {
+    httpOnly: true,
+    secure: false, // true только для https
+    sameSite: 'strict',
+  });
+  res.json({ message: 'Logged out' });
 });
 
 const PORT = 3001;

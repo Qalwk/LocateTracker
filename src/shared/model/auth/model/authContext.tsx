@@ -71,7 +71,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuth(true);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await fetch('http://localhost:3001/api/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
     localStorage.removeItem('accessToken');
     setIsAuth(false);
   };
