@@ -13,7 +13,11 @@
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@reduxjs/toolkit": "^2.8.2",
+    "@stagewise-plugins/react": "^0.6.1",
+    "@stagewise/toolbar-react": "^0.6.1",
+    "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-table": "^8.21.3",
+    "axios": "^1.10.0",
     "clsx": "^2.1.1",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.0",

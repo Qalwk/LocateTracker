@@ -12,6 +12,10 @@ import { useAuth } from 'shared/model/auth/model/authContext';
 
 import styles from './LoginPage.module.scss';
 
+import { useMutation } from '@tanstack/react-query';
+
+import { loginRequest } from 'features/auth/api/login';
+
 type FormSchema = z.infer<typeof formSchema>;
 
 export function LoginPage() {
@@ -23,22 +27,23 @@ export function LoginPage() {
     setFocus,
   } = useForm<FormSchema>({ resolver: zodResolver(formSchema) });
 
-  const onSubmit = async (data: FormSchema) => {
-    const res = await fetch('http://localhost:3001/api/login', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    const result = await res.json();
-    if (res.ok) {
+  const onSubmit = (data: FormSchema) => {
+    loginMutation.mutate(data);
+  };
+
+  const loginMutation = useMutation({
+    mutationFn: loginRequest,
+    onSuccess: (result) => {
       login(result.accessToken, result.refreshToken);
       navigate('/');
-    } else {
-      setError('password', { type: 'manual', message: result.error });
+    },
+    onError: (error: any) => {
+      setError('password', { 
+        type: 'manual', 
+        message: error.response?.data?.error || error.message 
+      });
     }
-    console.log(result.accessToken, result.refreshToken);
-  };
+  });
 
   useEffect(() => {
     // устанавливаем фокус на первое поле (имя пользователя) после монтирования компонента
