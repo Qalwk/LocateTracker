@@ -14,6 +14,7 @@ import {
   addFavorite,
   removeFavorite,
 } from 'entities/Flight/model/favoriteFlightsSlice';
+import { Map } from 'entities/Map/ui/Map';
 
 import { type Flight } from 'shared/mocks/FlightsData';
 import { flightsData } from 'shared/mocks/FlightsData';
@@ -21,7 +22,6 @@ import { flightsData } from 'shared/mocks/FlightsData';
 import { FlightFilters } from '../../../features/FlightFilters/ui/FlightFilters';
 import { FlightTabs } from './FlightTabs';
 import styles from './HomePage.module.scss';
-import { Map } from 'entities/Map/ui/Map';
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
@@ -47,10 +47,9 @@ export function HomePage() {
   );
   const dispatch = useDispatch();
 
-  const baseFlights =
-    !!isFavorite
-      ? flightsData.filter((flight) => favorites.includes(flight.id))
-      : flightsData;
+  const baseFlights = !!isFavorite
+    ? flightsData.filter((flight) => favorites.includes(flight.id))
+    : flightsData;
 
   const filteredFlights = useMemo(() => {
     return baseFlights.filter((flight) => {
@@ -90,9 +89,7 @@ export function HomePage() {
     <div className={styles.homeWrapper}>
       <Header />
       <div className={styles.homePageContainer}>
-        <div
-          className={clsx(styles.flight, { [styles.hide]: selectedFlight })}
-        >
+        <div className={clsx(styles.flight, { [styles.hide]: selectedFlight })}>
           <div className={styles.flightParams}>
             <FlightTabs isFavorite={isFavorite} />
             <FlightFilters

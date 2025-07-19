@@ -1,7 +1,10 @@
+import { jwtDecode } from 'jwt-decode';
+import { useMutation } from '@tanstack/react-query';
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router';
+import { refreshRequest } from 'features/auth/api/refresh';
 
 interface AuthContextType {
   isAuth: boolean;
@@ -27,23 +30,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const navigate = useNavigate();
 
+  // async function refreshAccessToken() {
+  //   const res = await fetch('http://localhost:3001/api/refresh', {
+  //     method: 'POST',
+  //     credentials: 'include',
+  //     headers: { 'Content-Type': 'application/json' },
+  //   });
+  //   if (res.ok) {
+  //     const data = await res.json();
+  //     localStorage.setItem('accessToken', data.accessToken);
+  //     setIsAuth(true);
+  //     console.log('new accessToken', data.accessToken);
+  //     return true;
+  //   } else {
+  //     logout();
+  //     return false;
+  //   }
+  // }
+
   async function refreshAccessToken() {
-    const res = await fetch('http://localhost:3001/api/refresh', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-    });
-    if (res.ok) {
-      const data = await res.json();
-      localStorage.setItem('accessToken', data.accessToken);
+    try {
+      const result = await refreshMutation.mutateAsync();
+      localStorage.setItem('accessToken', result.accessToken);
       setIsAuth(true);
-      console.log('new accessToken', data.accessToken);
+      console.log('new accessToken', result.accessToken);
       return true;
-    } else {
+    } catch {
       logout();
       return false;
     }
   }
+
+  const refreshMutation = useMutation({
+    mutationFn: refreshRequest
+  });
 
   useEffect(() => {
     const checkToken = async () => {

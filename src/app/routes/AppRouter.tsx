@@ -3,8 +3,8 @@ import { HomePage } from 'pages/homePage';
 import { LoginPage } from 'pages/loginPage';
 
 import { BrowserRouter, Route, Routes } from 'react-router';
-import { AuthProvider } from 'shared/model/auth/model/authContext';
 
+import { AuthProvider } from 'shared/model/auth/model/authContext';
 import { ProtectedRoute } from 'shared/ui/ProtectedRoute';
 import { RedirectIfAuth } from 'shared/ui/RedirectIfAuth';
 

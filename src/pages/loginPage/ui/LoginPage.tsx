@@ -1,20 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import type z from 'zod';
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
+import { loginRequest } from 'features/auth/api/login';
 import { formSchema } from 'features/auth/model/loginSchema';
 
 // import { users } from 'shared/mocks/UserData';
 import { useAuth } from 'shared/model/auth/model/authContext';
 
 import styles from './LoginPage.module.scss';
-
-import { useMutation } from '@tanstack/react-query';
-
-import { loginRequest } from 'features/auth/api/login';
 
 type FormSchema = z.infer<typeof formSchema>;
 
@@ -38,11 +36,11 @@ export function LoginPage() {
       navigate('/');
     },
     onError: (error: any) => {
-      setError('password', { 
-        type: 'manual', 
-        message: error.response?.data?.error || error.message 
+      setError('password', {
+        type: 'manual',
+        message: error.response?.data?.error || error.message,
       });
-    }
+    },
   });
 
   useEffect(() => {

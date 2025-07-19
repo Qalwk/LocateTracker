@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import styles from './Map.module.scss'
+import styles from './Map.module.scss';
 
 // Тип результата поиска Nominatim
 export interface NominatimResult {
@@ -17,7 +17,7 @@ interface SearchBoxProps {
 }
 
 export function SearchBox({ onSelect, setCenter }: SearchBoxProps) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState<NominatimResult[]>([]);
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -25,7 +25,7 @@ export function SearchBox({ onSelect, setCenter }: SearchBoxProps) {
     if (!query) return;
     const res = await fetch(
       // `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
-      `https://api.allorigins.win/get?url=${encodeURIComponent('https://nominatim.openstreetmap.org/search?format=json&q=' + query)}`
+      `https://api.allorigins.win/get?url=${encodeURIComponent('https://nominatim.openstreetmap.org/search?format=json&q=' + query)}`,
     );
     const data = await res.json();
     const results = JSON.parse(data.contents);
@@ -34,7 +34,10 @@ export function SearchBox({ onSelect, setCenter }: SearchBoxProps) {
 
   return (
     <div className={styles.SearchBox}>
-      <form className={styles.InputBtn} onSubmit={handleSearch}>
+      <form
+        className={styles.InputBtn}
+        onSubmit={handleSearch}
+      >
         <input
           type="text"
           placeholder="Город или страна"
@@ -48,16 +51,13 @@ export function SearchBox({ onSelect, setCenter }: SearchBoxProps) {
         {results.map((item) => (
           <li
             key={item.place_id}
-            style={{ cursor: "pointer", padding: 4 }}
+            style={{ cursor: 'pointer', padding: 4 }}
             onClick={() => {
-              onSelect([
-                parseFloat(item.lon),
-                parseFloat(item.lat)
-              ], item);
+              onSelect([parseFloat(item.lon), parseFloat(item.lat)], item);
               setResults([]);
-              console.log(results)
+              console.log(results);
               // console.log(item.lon, item.lat)
-              setCenter([parseFloat(item.lon), parseFloat(item.lat)])
+              setCenter([parseFloat(item.lon), parseFloat(item.lat)]);
             }}
           >
             {item.display_name}
@@ -66,4 +66,4 @@ export function SearchBox({ onSelect, setCenter }: SearchBoxProps) {
       </ul>
     </div>
   );
-};
+}

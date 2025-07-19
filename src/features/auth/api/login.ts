@@ -12,7 +12,9 @@ export interface LoginResponse {
   email: string;
 }
 
-export const loginRequest = async (data: LoginRequest): Promise<LoginResponse> => {
+export const loginRequest = async (
+  data: LoginRequest,
+): Promise<LoginResponse> => {
   const response = await axiosInstance.post<LoginResponse>('/login', data);
   return response.data;
 };
