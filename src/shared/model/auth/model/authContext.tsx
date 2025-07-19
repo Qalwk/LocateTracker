@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router';
 import { refreshRequest } from 'features/auth/api/refresh';
+import { logoutRequest } from 'features/auth/api/logout';
 
 interface AuthContextType {
   isAuth: boolean;
@@ -29,24 +30,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem('token'));
 
   const navigate = useNavigate();
-
-  // async function refreshAccessToken() {
-  //   const res = await fetch('http://localhost:3001/api/refresh', {
-  //     method: 'POST',
-  //     credentials: 'include',
-  //     headers: { 'Content-Type': 'application/json' },
-  //   });
-  //   if (res.ok) {
-  //     const data = await res.json();
-  //     localStorage.setItem('accessToken', data.accessToken);
-  //     setIsAuth(true);
-  //     console.log('new accessToken', data.accessToken);
-  //     return true;
-  //   } else {
-  //     logout();
-  //     return false;
-  //   }
-  // }
 
   async function refreshAccessToken() {
     try {
@@ -87,18 +70,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = (accessToken: string) => {
     localStorage.setItem('accessToken', accessToken);
-    // localStorage.setItem('refreshToken', refreshToken);
     setIsAuth(true);
   };
 
-  const logout = async () => {
-    await fetch('http://localhost:3001/api/logout', {
-      method: 'POST',
-      credentials: 'include',
-    });
-    localStorage.removeItem('accessToken');
-    setIsAuth(false);
+  const logout = () => {
+    logoutMutation.mutate()
   };
+
+  const logoutMutation = useMutation({
+    mutationFn: logoutRequest,
+    onSuccess: () => {
+      localStorage.removeItem('accessToken');
+      setIsAuth(false);
+    },
+    onError: (error) => {
+      console.error('Ошибка при выходе:', error);
+    },
+  });
 
   return (
     <AuthContext.Provider value={{ isAuth, login, logout }}>
