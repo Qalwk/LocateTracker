@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { useAuth } from 'shared/model/auth/model/authContext';
+import { useAuth } from 'shared/model/auth/context/authContext';
 import { setTheme, toggleTheme } from 'shared/model/themeSlice';
 
 import styles from './Header.module.scss';

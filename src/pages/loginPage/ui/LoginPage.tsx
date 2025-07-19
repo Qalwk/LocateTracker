@@ -10,7 +10,7 @@ import { loginRequest } from 'features/auth/api/login';
 import { formSchema } from 'features/auth/model/loginSchema';
 
 // import { users } from 'shared/mocks/UserData';
-import { useAuth } from 'shared/model/auth/model/authContext';
+import { useAuth } from 'shared/model/auth/context/authContext';
 
 import styles from './LoginPage.module.scss';
 
