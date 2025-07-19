@@ -17,9 +17,11 @@ import {
 import { Map } from 'entities/Map/ui/Map';
 
 import { type Flight } from 'shared/mocks/FlightsData';
-import { flightsData } from 'shared/mocks/FlightsData';
 
-import { FlightFilters } from '../../../features/FlightFilters/ui/FlightFilters';
+import { useQuery } from '@tanstack/react-query';
+import { fetchFlights } from 'shared/api/axiosInstance';
+
+import { FlightFilters } from 'features/FlightFilters/ui/FlightFilters';
 import { FlightTabs } from './FlightTabs';
 import styles from './HomePage.module.scss';
 
@@ -33,6 +35,11 @@ export function HomePage() {
   const [flightTo, setFlightTo] = useState('');
 
   const location = useLocation();
+
+  const { data: flightsData = [], isLoading, isError } = useQuery<Flight[]>({
+    queryKey: ['users'],
+    queryFn: fetchFlights,
+  });
 
   useEffect(() => {
     if (location.pathname.includes('/favorites')) {
@@ -103,6 +110,11 @@ export function HomePage() {
               setFlightTo={setFlightTo}
             />
           </div>
+          {isError && (
+            <div style={{ color: 'red', textAlign: 'center', marginTop: 40 }}>
+              Не удалось загрузить список рейсов. Попробуйте позже.
+            </div>
+          )}
           <FlightList
             flights={filteredFlights}
             onSelect={setSelectedFlight}
@@ -110,6 +122,7 @@ export function HomePage() {
             onLikeClick={handleLikeClick}
             favorites={favorites}
             progress={progressBar}
+            isLoading={isLoading}
           />
         </div>
         <FlightDetails

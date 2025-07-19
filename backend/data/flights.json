@@ -2,7 +2,7 @@
   {
     "id": "TK143",
     "airline": "Turkish Airlines",
-    "airlineLogo": "/assets/FlightsLogoComany/turkish-airlines-logo-png_seeklogo-366077.png",
+    "airlineLogo": "turkish-airlines-logo-png_seeklogo-366077.png",
     "flightNumber": "TK143",
     "codes": ["93247", "TC-JFP"],
     "from": {
@@ -32,7 +32,7 @@
   {
     "id": "RN1782",
     "airline": "Ryanair",
-    "airlineLogo": "/assets/FlightsLogoComany/images.jpg",
+    "airlineLogo": "images.jpg",
     "flightNumber": "RN1782",
     "codes": ["7842", "D-AISP"],
     "from": {
@@ -63,7 +63,7 @@
   {
     "id": "S7124",
     "airline": "S7 Airlines",
-    "airlineLogo": "/assets/FlightsLogoComany/images.png",
+    "airlineLogo": "images.png",
     "flightNumber": "S7124",
     "codes": ["88015", "RA-73415"],
     "from": {
@@ -93,7 +93,7 @@
   {
     "id": "LX318",
     "airline": "Swiss",
-    "airlineLogo": "/assets/FlightsLogoComany/images (1).png",
+    "airlineLogo": "images (1).png",
     "flightNumber": "LX318",
     "codes": ["94102", "HB-JHK"],
     "from": {
@@ -123,7 +123,7 @@
   {
     "id": "LH1234",
     "airline": "Lufthansa",
-    "airlineLogo": "/assets/FlightsLogoComany/LZ046-lufthansa.jpg",
+    "airlineLogo": "LZ046-lufthansa.jpg",
     "flightNumber": "LH1234",
     "codes": ["09036", "D-AIXQ"],
     "from": {
@@ -153,7 +153,7 @@
   {
     "id": "TK142",
     "airline": "Turkish Airlines",
-    "airlineLogo": "/assets/FlightsLogoComany/turkish-airlines-logo-png_seeklogo-366077.png",
+    "airlineLogo": "turkish-airlines-logo-png_seeklogo-366077.png",
     "flightNumber": "TK142",
     "codes": ["93247", "TC-JFP"],
     "from": {

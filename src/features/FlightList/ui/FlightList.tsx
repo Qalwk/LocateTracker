@@ -15,6 +15,7 @@ interface FlightListProps {
   progress: number;
   favorites: string[];
   onLikeClick: (flightId: string) => void;
+  isLoading: boolean;
 }
 
 export function FlightList({
@@ -24,18 +25,8 @@ export function FlightList({
   progress,
   favorites,
   onLikeClick,
+  isLoading
 }: FlightListProps) {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
 
   return (
     <div className={styles.flightList}>

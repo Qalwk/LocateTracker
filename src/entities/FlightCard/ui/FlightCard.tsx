@@ -44,7 +44,7 @@ export function FlightCard({
     }
     if (onClick) onClick(flight);
   };
-
+  
   return (
     <div
       onClick={handleLinked}
@@ -54,7 +54,8 @@ export function FlightCard({
         <div className={styles.airline}>
           <div className={styles.airlineLogo}>
             <img
-              src={flight.airlineLogo}
+              // src={flight.airlineLogo}
+              src={`http://localhost:3001/images/${flight.airlineLogo}`}
               alt="airlineLogo"
             />
           </div>

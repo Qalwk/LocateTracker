@@ -15,6 +15,9 @@ const app = express();
 
 const FRONTEND_ORIGIN = 'http://localhost:5173';
 
+// Раздача статики для картинок
+app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+
 app.use(cors({
   origin: FRONTEND_ORIGIN,
   credentials: true
