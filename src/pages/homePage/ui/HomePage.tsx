@@ -37,7 +37,7 @@ export function HomePage() {
   const location = useLocation();
 
   const { data: flightsData = [], isLoading, isError } = useQuery<Flight[]>({
-    queryKey: ['users'],
+    queryKey: ['flights'],
     queryFn: fetchFlights,
   });
 

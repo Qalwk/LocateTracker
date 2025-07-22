@@ -14,7 +14,7 @@ export function FlightDetailsHeader({
       <div className={styles.airlineMainInfo}>
         <img
           className={styles.airlineImage}
-          src={flight.airlineLogo}
+          src={`http://localhost:3001/images/${flight.airlineLogo}`}
           alt={flight.airline}
         />
         <div className={styles.flightNumberBlock}>

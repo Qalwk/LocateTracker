@@ -6,12 +6,17 @@ import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@as-integrations/express5';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import http from 'http';
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const httpServer = http.createServer(app);
 
 const FRONTEND_ORIGIN = 'http://localhost:5173';
 
@@ -109,7 +114,58 @@ app.post('/api/logout', (req, res) => {
   res.json({ message: 'Logged out' });
 });
 
+// --- GraphQL schema and resolvers ---
+const typeDefs = `#graphql
+  type Flight {
+    id: ID!
+    airline: String!
+    speed: String!
+    codes: [String!]!
+    from: Airport!
+    to: Airport!
+  }
+  type Airport {
+    city: String!
+    iata: String!
+  }
+  type Query {
+    flights: [Flight!]!
+    flight(id: ID!): Flight
+  }
+`;
+
+const resolvers = {
+  Query: {
+    flights: () => {
+      const flights = JSON.parse(fs.readFileSync(flightsPath, 'utf-8'));
+      return flights;
+    },
+    flight: (_, { id }) => {
+      const flights = JSON.parse(fs.readFileSync(flightsPath, 'utf-8'));
+      return flights.find(f => f.id === id);
+    },
+  },
+};
+
+async function startApolloServer() {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
+  await server.start();
+  app.use(
+    '/graphql',
+    cors({ origin: FRONTEND_ORIGIN, credentials: true }),
+    express.json(),
+    expressMiddleware(server)
+  );
+}
+
+await startApolloServer();
+
 const PORT = 3001;
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
+  console.log(`GraphQL endpoint ready at http://localhost:${PORT}/graphql`);
 });  

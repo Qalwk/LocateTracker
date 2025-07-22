@@ -22,10 +22,23 @@ import {
 
 import { useState } from 'react';
 
-import { flightsData } from 'shared/mocks/FlightsData';
+// import { flightsData } from 'shared/mocks/FlightsData';
 import type { Flight } from 'shared/mocks/FlightsData';
 
 import styles from './FlightTable.module.scss';
+
+import { gql, useQuery } from '@apollo/client';
+
+const GET_FLIGHTS = gql`
+  query GetFlights {
+    flights {
+      id
+      airline
+      codes
+      speed
+    }
+  }
+`;
 
 const columnHelper = createColumnHelper<Flight>();
 
@@ -84,12 +97,17 @@ const columns = [
 ];
 
 export function FlightTable() {
-  const [tableData] = useState<Flight[]>(() => [...flightsData]);
+  const { data, loading, error } = useQuery(GET_FLIGHTS);
+
+  const flights = data?.flights ?? [];
+
+  // const [tableData] = useState<Flight[]>(() => [...flights]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
 
+
   const table = useReactTable<Flight>({
-    data: tableData,
+    data: flights,
     columns,
     state: {
       sorting,

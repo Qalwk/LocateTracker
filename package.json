@@ -11,6 +11,9 @@
     "format": "prettier --config prettierrc.yml --write \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
+    "@apollo/server": "^5.0.0",
+    "@as-integrations/express5": "^1.1.2",
     "@hookform/resolvers": "^5.1.1",
     "@reduxjs/toolkit": "^2.8.2",
     "@stagewise-plugins/react": "^0.6.1",
@@ -20,9 +23,11 @@
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "effector": "^23.4.1",
     "effector-react": "^23.3.0",
+    "graphql": "^16.11.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.525.0",
     "maplibre-gl": "^5.6.1",
