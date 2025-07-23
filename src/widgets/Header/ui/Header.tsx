@@ -44,13 +44,21 @@ export function Header() {
 
   return (
     <div className={styles.header}>
-      <div onClick={handleHomeLink}>
-        <p>LOGO</p>
-      </div>
+      <p
+        onClick={handleHomeLink}
+        onMouseEnter={() => import('pages/homePage')}
+        style={{ cursor: 'pointer' }}
+      >
+        LOGO
+      </p>
       <div className={styles.btnWrap}>
-        <div onClick={handleTableLink}>
-          <p>Flight Table</p>
-        </div>
+        <p
+          onClick={handleTableLink}
+          onMouseEnter={() => import('pages/flightTablePage')}
+          style={{ cursor: 'pointer' }}
+        >
+          Flight Table
+        </p>
         <button
           onClick={() => dispatch(toggleTheme())}
           className={styles.theme}
