@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Map.module.scss';
 import { SearchBox } from './SearchBox';
 
-export function Map() {
+export default function Map() {
   const mapContainer = useRef(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
 

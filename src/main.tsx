@@ -1,4 +1,3 @@
-import { StagewiseToolbar } from '@stagewise/toolbar-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from 'app/store';
 import { LazyMotion, domAnimation } from 'framer-motion';
@@ -21,7 +20,6 @@ createRoot(document.getElementById('root')!).render(
         <StrictMode>
           <LazyMotion features={domAnimation}>
             <AppRouter />
-            <StagewiseToolbar />
           </LazyMotion>
         </StrictMode>
       </Provider>

@@ -7,14 +7,14 @@ import { useLocation } from 'react-router';
 
 import { FlightList } from 'features/FlightList';
 
-import { FlightDetails } from 'widgets/FlightDetails';
+import { FlightDetailsSuspense } from 'widgets/FlightDetails/index';
 import { Header } from 'widgets/Header';
 
 import {
   addFavorite,
   removeFavorite,
 } from 'entities/Flight/model/favoriteFlightsSlice';
-import { Map } from 'entities/Map/ui/Map';
+import { MapWithSuspense } from 'entities/Map/index';
 
 import { type Flight } from 'shared/mocks/FlightsData';
 
@@ -125,14 +125,14 @@ export function HomePage() {
             isLoading={isLoading}
           />
         </div>
-        <FlightDetails
+        <FlightDetailsSuspense
           progress={progressBar}
           flight={selectedFlight}
           onClose={() => setSelectedFlight(null)}
         />
       </div>
       <div className={styles.mapContainer}>
-        <Map />
+        <MapWithSuspense />
       </div>
     </div>
   );

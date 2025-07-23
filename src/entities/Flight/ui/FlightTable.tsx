@@ -97,7 +97,7 @@ const columns = [
 ];
 
 export function FlightTable() {
-  const { data, loading, error } = useQuery(GET_FLIGHTS);
+  const { data } = useQuery(GET_FLIGHTS);
 
   const flights = data?.flights ?? [];
 

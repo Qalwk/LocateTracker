@@ -10,7 +10,7 @@ import { FlightDetailsProgress } from './FlightDetailsProgress';
 import { FlightDetailsRoute } from './FlightDetailsRoute';
 import { FlightDetailsSchedule } from './FlightDetailsSchedule';
 
-export function FlightDetails({
+export default function FlightDetails({
   flight,
   onClose,
   progress,

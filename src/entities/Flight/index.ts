@@ -1,0 +1,1 @@
+export { FlightTable as default } from './ui/FlightTable';
