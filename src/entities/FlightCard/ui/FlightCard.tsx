@@ -3,6 +3,8 @@ import { Heart } from 'lucide-react';
 
 import { useLocation, useNavigate } from 'react-router';
 
+import React, { forwardRef } from 'react';
+
 import FlightStatus from 'entities/Flight/ui/FlightStatus';
 
 import { type Flight } from 'shared/mocks/FlightsData';
@@ -16,20 +18,22 @@ interface FlightCardProps {
   isFavorite: boolean;
   onLikeClick: () => void;
   progress: number;
+  ref?: React.RefObject<HTMLDivElement>;
 }
 
 function slugify(str: string) {
   return str.toLowerCase().replace(/\s+/g, '-');
 }
 
-export function FlightCard({
+export const FlightCard = forwardRef<HTMLDivElement, FlightCardProps>(function FlightCard(
+  {
   flight,
   onClick,
   active = false,
   isFavorite,
   onLikeClick,
   progress,
-}: FlightCardProps) {
+}, ref) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -47,6 +51,7 @@ export function FlightCard({
   
   return (
     <div
+      ref={ref}
       onClick={handleLinked}
       className={clsx(styles.flightCard, { [styles.active]: active })}
     >
@@ -95,4 +100,4 @@ export function FlightCard({
       </div>
     </div>
   );
-}
+});

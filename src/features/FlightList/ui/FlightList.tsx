@@ -5,6 +5,8 @@ import { FlightCard } from 'entities/FlightCard/ui/FlightCard';
 
 import { type Flight } from 'shared/mocks/FlightsData';
 
+import { useRef, useEffect } from 'react';
+
 import styles from './FlightList.module.scss';
 
 interface FlightListProps {
@@ -15,6 +17,9 @@ interface FlightListProps {
   favorites: string[];
   onLikeClick: (flightId: string) => void;
   isLoading: boolean;
+  onLoadMore: () => void;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
 }
 
 export function FlightList({
@@ -24,8 +29,32 @@ export function FlightList({
   progress,
   favorites,
   onLikeClick,
-  isLoading
+  isLoading,
+  onLoadMore,
+  hasNextPage,
+  isFetchingNextPage
 }: FlightListProps) {
+
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!hasNextPage || isFetchingNextPage) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          onLoadMore();
+        }
+      },
+      { threshold: 1 }
+    );
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+    console.log('loadMoreRef', loadMoreRef.current);
+    return () => {
+      if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
+    };
+  }, [onLoadMore, hasNextPage, isFetchingNextPage]);
 
   return (
     <div className={styles.flightList}>
@@ -35,17 +64,24 @@ export function FlightList({
           className={styles.skeleton}
         />
       ) : (
-        flights.map((flight) => (
-          <FlightCard
-            key={flight.id}
-            flight={flight}
-            onClick={() => onSelect(flight)}
-            active={selectedFlight?.id === flight.id}
-            progress={progress}
-            isFavorite={favorites.includes(flight.id)}
-            onLikeClick={() => onLikeClick(flight.id)}
-          />
-        ))
+        flights.map((flight, idx) => {
+          const isTrigger = hasNextPage && idx === flights.length - 5;
+          return (
+            <FlightCard
+              key={flight.id}
+              flight={flight}
+              onClick={() => onSelect(flight)}
+              active={selectedFlight?.id === flight.id}
+              progress={progress}
+              isFavorite={favorites.includes(flight.id)}
+              onLikeClick={() => onLikeClick(flight.id)}
+              ref={isTrigger ? loadMoreRef : undefined}
+            />
+          );
+        })
+      )}
+      {isFetchingNextPage && (
+        <div style={{ textAlign: 'center', margin: 10 }}>Загрузка...</div>
       )}
     </div>
   );

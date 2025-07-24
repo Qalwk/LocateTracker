@@ -18,12 +18,13 @@ import { MapWithSuspense } from 'entities/Map/index';
 
 import { type Flight } from 'shared/mocks/FlightsData';
 
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 import { fetchFlights } from 'shared/api/axiosInstance';
 
 import { FlightFilters } from 'features/FlightFilters/ui/FlightFilters';
 import { FlightTabs } from './FlightTabs';
 import styles from './HomePage.module.scss';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
@@ -36,10 +37,33 @@ export function HomePage() {
 
   const location = useLocation();
 
-  const { data: flightsData = [], isLoading, isError } = useQuery<Flight[]>({
+  // const { data: flightsData = [], isLoading, isError } = useQuery<Flight[]>({
+  //   queryKey: ['flights'],
+  //   queryFn: fetchFlights,
+  // });
+
+  const {
+    data: flightsData = [],
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError
+  } = useInfiniteQuery({
     queryKey: ['flights'],
-    queryFn: fetchFlights,
+    queryFn: ({ pageParam = 0 }) => fetchFlights({ offset: pageParam as number, limit: 10 }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      // Приводим lastPage к типу массива, если fetchFlights возвращает массив
+      if (Array.isArray(lastPage) && lastPage.length < 10) return undefined;
+      return allPages.length * 10;
+    }
   });
+
+  const allFlights =
+    flightsData && 'pages' in flightsData && Array.isArray(flightsData.pages)
+      ? flightsData.pages.flat()
+      : [];
 
   useEffect(() => {
     if (location.pathname.includes('/favorites')) {
@@ -55,8 +79,8 @@ export function HomePage() {
   const dispatch = useDispatch();
 
   const baseFlights = !!isFavorite
-    ? flightsData.filter((flight) => favorites.includes(flight.id))
-    : flightsData;
+    ? allFlights.filter((flight) => favorites.includes(flight.id))
+    : allFlights;
 
   const filteredFlights = useMemo(() => {
     return baseFlights.filter((flight) => {
@@ -123,6 +147,11 @@ export function HomePage() {
             favorites={favorites}
             progress={progressBar}
             isLoading={isLoading}
+            onLoadMore={() => {
+              if (hasNextPage && !isFetchingNextPage) fetchNextPage();
+            }}
+            hasNextPage={!!hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
           />
         </div>
         <FlightDetailsSuspense
@@ -132,7 +161,7 @@ export function HomePage() {
         />
       </div>
       <div className={styles.mapContainer}>
-        <MapWithSuspense />
+        {/* <MapWithSuspense /> */}
       </div>
     </div>
   );

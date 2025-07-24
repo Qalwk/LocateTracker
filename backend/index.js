@@ -48,7 +48,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.get('/api/flights', (req, res) => {
   try {
     const flights = JSON.parse(fs.readFileSync(flightsPath, 'utf-8'));
-    res.json(flights);
+    // Получаем параметры из query, по умолчанию offset=0, limit=10
+    const offset = parseInt(req.query.offset, 10) || 0;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    // Возвращаем только нужный срез
+    const pagedFlights = flights.slice(offset, offset + limit);
+    res.json(pagedFlights);
   } catch (e) {
     res.status(500).json({ error: 'Failed to load flights' });
   }
