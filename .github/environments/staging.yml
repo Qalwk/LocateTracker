@@ -1,0 +1,17 @@
+name: staging
+url: https://staging.skytrack.com
+
+protection_rules:
+  - required_reviewers:
+      required_approving_review_count: 1
+  - wait_timer:
+      wait_time: 5
+  - deployment_branches:
+      protected_branches: true
+      custom_branch_policies: false
+
+environment_variables:
+  NODE_ENV: staging
+  API_URL: https://staging-api.skytrack.com
+  SENTRY_DSN: ${{ secrets.STAGING_SENTRY_DSN }}
+  ANALYTICS_ID: ${{ secrets.STAGING_ANALYTICS_ID }}

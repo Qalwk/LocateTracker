@@ -6,10 +6,34 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint src --fix",
+    "build:analyze": "vite build --mode analyze",
     "preview": "vite preview",
+    "lint": "eslint src --fix",
+    "lint:check": "eslint src",
     "format": "prettier --config prettierrc.yml --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "test": "jest"
+    "format:check": "prettier --config prettierrc.yml --check \"src/**/*.{ts,tsx,js,jsx}\"",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:unit": "jest",
+    "test:e2e": "playwright test",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "prepare": "husky install",
+    "lighthouse": "lhci autorun",
+    "security:audit": "npm audit --audit-level=moderate",
+    "security:fix": "npm audit fix"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",
@@ -17,6 +41,7 @@
     "@as-integrations/express5": "^1.1.2",
     "@hookform/resolvers": "^5.1.1",
     "@reduxjs/toolkit": "^2.8.2",
+    "@sentry/react": "^9.43.0",
     "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.10.0",
@@ -45,7 +70,10 @@
     "zod-i18n-map": "^2.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.29.0",
+    "@playwright/test": "^1.54.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -58,12 +86,16 @@
     "@vitejs/plugin-react-swc": "^3.10.2",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.2.0",
+    "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.6.0",
     "rollup-plugin-visualizer": "^6.0.3",
     "sass-embedded": "^1.89.2",

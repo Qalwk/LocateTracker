@@ -1,0 +1,17 @@
+name: production
+url: https://skytrack.com
+
+protection_rules:
+  - required_reviewers:
+      required_approving_review_count: 2
+  - wait_timer:
+      wait_time: 10
+  - deployment_branches:
+      protected_branches: true
+      custom_branch_policies: false
+
+environment_variables:
+  NODE_ENV: production
+  API_URL: https://api.skytrack.com
+  SENTRY_DSN: ${{ secrets.PRODUCTION_SENTRY_DSN }}
+  ANALYTICS_ID: ${{ secrets.PRODUCTION_ANALYTICS_ID }}
