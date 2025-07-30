@@ -11,7 +11,7 @@ interface FlightFiltersProps {
   setFlightTo: (value: string) => void;
 }
 
-export function FlightFilters({
+export default function FlightFilters({
   flightId,
   setFlightId,
   flightCompany,
@@ -62,5 +62,3 @@ export function FlightFilters({
     </div>
   );
 }
-
-export default FlightFilters;

@@ -1,6 +1,6 @@
 import styles from './Flight.module.scss';
 
-export function FlightInfoRow({
+export default function FlightInfoRow({
   leftLabel,
   leftValue,
   rightLabel,

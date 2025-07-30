@@ -1,4 +1,4 @@
-import { FlightInfoRow } from 'entities/Flight/ui/FlightInfoRow';
+import FlightInfoRow from 'entities/Flight/ui/FlightInfoRow';
 
 import { type Flight } from 'shared/mocks/FlightsData';
 

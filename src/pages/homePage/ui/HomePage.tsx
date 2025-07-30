@@ -14,14 +14,13 @@ import {
   addFavorite,
   removeFavorite,
 } from 'entities/Flight/model/favoriteFlightsSlice';
-import { MapWithSuspense } from 'entities/Map/index';
 
 import { type Flight } from 'shared/mocks/FlightsData';
 
 // import { useQuery } from '@tanstack/react-query';
 import { fetchFlights } from 'shared/api/axiosInstance';
 
-import { FlightFilters } from 'features/FlightFilters/ui/FlightFilters';
+import FlightFilters from 'features/FlightFilters/ui/FlightFilters';
 import { FlightTabs } from './FlightTabs';
 import styles from './HomePage.module.scss';
 import { useInfiniteQuery } from '@tanstack/react-query';
