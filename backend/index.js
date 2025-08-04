@@ -180,6 +180,84 @@ app.post("/api/logout", (req, res) => {
   res.json({ message: "Logged out" });
 });
 
+// API для работы с избранными рейсами
+app.get("/api/favorites", authenticateToken, (req, res) => {
+  try {
+    const users = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
+    const user = users.find((u) => u.id === req.user.userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ favorites: user.favorites || [] });
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load favorites" });
+  }
+});
+
+app.post("/api/favorites", authenticateToken, (req, res) => {
+  try {
+    const { flightId } = req.body;
+
+    if (!flightId) {
+      return res.status(400).json({ error: "Flight ID is required" });
+    }
+
+    const users = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
+    const userIndex = users.findIndex((u) => u.id === req.user.userId);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const user = users[userIndex];
+    if (!user.favorites) {
+      user.favorites = [];
+    }
+
+    // Добавляем рейс в избранное, если его там нет
+    if (!user.favorites.includes(flightId)) {
+      user.favorites.push(flightId);
+    }
+
+    // Сохраняем обновленные данные
+    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
+
+    res.json({ favorites: user.favorites });
+  } catch (e) {
+    res.status(500).json({ error: "Failed to add favorite" });
+  }
+});
+
+app.delete("/api/favorites/:flightId", authenticateToken, (req, res) => {
+  try {
+    const { flightId } = req.params;
+
+    const users = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
+    const userIndex = users.findIndex((u) => u.id === req.user.userId);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const user = users[userIndex];
+    if (!user.favorites) {
+      user.favorites = [];
+    }
+
+    // Удаляем рейс из избранного
+    user.favorites = user.favorites.filter((id) => id !== flightId);
+
+    // Сохраняем обновленные данные
+    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
+
+    res.json({ favorites: user.favorites });
+  } catch (e) {
+    res.status(500).json({ error: "Failed to remove favorite" });
+  }
+});
+
 // --- GraphQL schema and resolvers ---
 const typeDefs = `#graphql
   type Flight {

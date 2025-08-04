@@ -5,7 +5,8 @@
     "username": "admin",
     "password": "adminpass",
     "role": "admin",
-    "company": null
+    "company": null,
+    "favorites": ["TK143", "S7126"]
   },
   {
     "id": "2",
@@ -13,7 +14,8 @@
     "username": "turkish_dispatcher",
     "password": "turkish123",
     "role": "dispatcher",
-    "company": "Turkish Airlines"
+    "company": "Turkish Airlines",
+    "favorites": []
   },
   {
     "id": "3",
@@ -21,7 +23,8 @@
     "username": "ryanair_ops",
     "password": "ryanair123",
     "role": "dispatcher",
-    "company": "Ryanair"
+    "company": "Ryanair",
+    "favorites": ["RN1786"]
   },
   {
     "id": "4",
@@ -29,7 +32,8 @@
     "username": "s7_operator",
     "password": "s7airlines123",
     "role": "dispatcher",
-    "company": "S7 Airlines"
+    "company": "S7 Airlines",
+    "favorites": []
   },
   {
     "id": "5",
@@ -37,7 +41,8 @@
     "username": "swiss_dispatch",
     "password": "swiss123",
     "role": "dispatcher",
-    "company": "Swiss"
+    "company": "Swiss",
+    "favorites": []
   },
   {
     "id": "6",
@@ -45,6 +50,7 @@
     "username": "lufthansa_ops",
     "password": "lufthansa123",
     "role": "dispatcher",
-    "company": "Lufthansa"
+    "company": "Lufthansa",
+    "favorites": []
   }
 ]

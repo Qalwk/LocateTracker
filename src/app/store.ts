@@ -1,13 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import { favoriteFlightsSlice } from 'entities/Flight/model/favoriteFlightsSlice';
-
-import { themeSlice } from 'shared/model/themeSlice';
+import { themeSlice } from "shared/model/themeSlice";
 
 export const store = configureStore({
   reducer: {
     theme: themeSlice.reducer,
-    favoriteFlights: favoriteFlightsSlice.reducer,
   },
 });
 

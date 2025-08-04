@@ -1,9 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import type { RootState } from "app/store";
 import clsx from "clsx";
 
 import { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
 import FlightFilters from "features/FlightFilters/ui/FlightFilters";
@@ -12,14 +10,9 @@ import { FlightList } from "features/FlightList";
 import { FlightDetailsSuspense } from "widgets/FlightDetails/index";
 import { Header } from "widgets/Header";
 
-import {
-  addFavorite,
-  removeFavorite,
-} from "entities/Flight/model/favoriteFlightsSlice";
-
-// import { useQuery } from '@tanstack/react-query';
 import { fetchFlights } from "shared/api/axiosInstance";
 import { type Flight } from "shared/mocks/FlightsData";
+import { useFavorites } from "shared/hooks";
 
 import { FlightTabs } from "./FlightTabs";
 import styles from "./HomePage.module.scss";
@@ -72,10 +65,7 @@ export function HomePage() {
     }
   }, [location]);
 
-  const favorites = useSelector(
-    (state: RootState) => state.favoriteFlights.ids,
-  );
-  const dispatch = useDispatch();
+  const { favorites, toggleFavorite } = useFavorites();
 
   const baseFlights = !!isFavorite
     ? allFlights.filter((flight) => favorites.includes(flight.id))
@@ -102,16 +92,8 @@ export function HomePage() {
   }, [baseFlights, flightId, flightCompany, flightFrom, flightTo]);
 
   const handleLikeClick = (flightId: string) => {
-    if (favorites.includes(flightId)) {
-      dispatch(removeFavorite(flightId));
-    } else {
-      dispatch(addFavorite(flightId));
-    }
+    toggleFavorite(flightId);
   };
-
-  useEffect(() => {
-    localStorage.setItem("favoriteFlights", JSON.stringify(favorites));
-  }, [favorites]);
 
   const progressBar = 60;
 
