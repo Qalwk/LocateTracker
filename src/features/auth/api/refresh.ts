@@ -1,4 +1,4 @@
-import { axiosInstance } from 'shared/api/axiosInstance';
+import { axiosInstance } from "shared/api/axiosInstance";
 
 export interface RefreshResponse {
   accessToken: string;
@@ -7,8 +7,7 @@ export interface RefreshResponse {
   email: string;
 }
 
-export const refreshRequest = async ()
-  : Promise<RefreshResponse> => {
-  const response = await axiosInstance.post<RefreshResponse>('/refresh');
+export const refreshRequest = async (): Promise<RefreshResponse> => {
+  const response = await axiosInstance.post<RefreshResponse>("/refresh");
   return response.data;
 };

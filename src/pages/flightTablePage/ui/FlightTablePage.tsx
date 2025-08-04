@@ -1,7 +1,8 @@
-import { Header } from 'widgets/Header';
+import { Header } from "widgets/Header";
 
-import styles from './FlightTablePage.module.scss';
-import FlightTable from 'entities/Flight';
+import FlightTable from "entities/Flight";
+
+import styles from "./FlightTablePage.module.scss";
 
 export function FlightTablePage() {
   return (

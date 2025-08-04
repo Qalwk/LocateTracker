@@ -1,18 +1,18 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import type z from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import type z from "zod";
 
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
-import { loginRequest } from 'features/auth/api/login';
-import { formSchema } from 'features/auth/model/loginSchema';
+import { loginRequest } from "features/auth/api/login";
+import { formSchema } from "features/auth/model/loginSchema";
 
 // import { users } from 'shared/mocks/UserData';
-import { useAuth } from 'shared/model/auth/context/authContext';
+import { useAuth } from "shared/model/auth/context/authContext";
 
-import styles from './LoginPage.module.scss';
+import styles from "./LoginPage.module.scss";
 
 type FormSchema = z.infer<typeof formSchema>;
 
@@ -32,12 +32,17 @@ export function LoginPage() {
   const loginMutation = useMutation({
     mutationFn: loginRequest,
     onSuccess: (result) => {
-      login(result.accessToken, result.refreshToken);
-      navigate('/');
+      login(result.accessToken, {
+        username: result.username,
+        email: result.email,
+        role: result.role,
+        company: result.company,
+      });
+      navigate("/");
     },
     onError: (error: any) => {
-      setError('password', {
-        type: 'manual',
+      setError("password", {
+        type: "manual",
         message: error.response?.data?.error || error.message,
       });
     },
@@ -45,7 +50,7 @@ export function LoginPage() {
 
   useEffect(() => {
     // устанавливаем фокус на первое поле (имя пользователя) после монтирования компонента
-    setFocus('email');
+    setFocus("email");
   }, []);
 
   const navigate = useNavigate();
@@ -54,10 +59,7 @@ export function LoginPage() {
 
   return (
     <div className={styles.loginWrapper}>
-      <form
-        className={styles.loginForm}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <h1 className={styles.loginTitle}>Вход в SkyTrack</h1>
         <div className={styles.loginFieldWrapper}>
           <div className={styles.loginField}>
@@ -66,11 +68,11 @@ export function LoginPage() {
               id="email"
               type="text"
               autoComplete="username"
-              {...register('email', {
-                required: 'Введите email',
+              {...register("email", {
+                required: "Введите email",
                 pattern: {
                   value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
-                  message: 'Введите корректный email',
+                  message: "Введите корректный email",
                 },
               })}
             />
@@ -84,28 +86,30 @@ export function LoginPage() {
               id="password"
               type="password"
               autoComplete="current-password"
-              {...register('password', { required: 'Введите пароль' })}
+              {...register("password", { required: "Введите пароль" })}
             />
           </div>
           {errors.password && (
             <span className={styles.loginError}>{errors.password.message}</span>
           )}
         </div>
-        <button
-          type="submit"
-          className={styles.loginButton}
-        >
+        <button type="submit" className={styles.loginButton}>
           Войти
         </button>
         <button
           type="button"
           className={styles.loginButton}
           onClick={() => {
-            login('demo-acces-token', 'demo-refresh-token');
-            navigate('/');
+            login("demo-access-token", {
+              email: "admin@skytrack.com",
+              username: "admin",
+              role: "admin",
+              company: null,
+            });
+            navigate("/");
           }}
         >
-          Авто-вход
+          Авто-вход (Админ)
         </button>
       </form>
     </div>

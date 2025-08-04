@@ -1,1 +1,1 @@
-export { MapWithSuspense } from './ui/MapWithSuspense';
+export { MapWithSuspense } from "./ui/MapWithSuspense";

@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 
-const LazyMap = React.lazy(() => import('./Map'));
+const LazyMap = React.lazy(() => import("./Map"));
 
 export const MapWithSuspense: React.FC = (props) => (
   <Suspense fallback={<div>Загрузка карты...</div>}>

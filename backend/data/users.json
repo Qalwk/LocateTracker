@@ -1,38 +1,50 @@
 [
   {
     "id": "1",
-    "email": "admin@gmail.com",
+    "email": "admin@skytrack.com",
     "username": "admin",
-    "password": "adminpass"
+    "password": "adminpass",
+    "role": "admin",
+    "company": null
   },
   {
     "id": "2",
-    "email": "test@example.com",
-    "username": "testuser",
-    "password": "123456"
+    "email": "dispatcher@turkishairlines.com",
+    "username": "turkish_dispatcher",
+    "password": "turkish123",
+    "role": "dispatcher",
+    "company": "Turkish Airlines"
   },
   {
     "id": "3",
-    "email": "user@demo.com",
-    "username": "demo",
-    "password": "demo123"
+    "email": "operations@ryanair.com",
+    "username": "ryanair_ops",
+    "password": "ryanair123",
+    "role": "dispatcher",
+    "company": "Ryanair"
   },
   {
     "id": "4",
-    "email": "jane.doe@mail.com",
-    "username": "jane",
-    "password": "qwerty"
+    "email": "flightops@s7.ru",
+    "username": "s7_operator",
+    "password": "s7airlines123",
+    "role": "dispatcher",
+    "company": "S7 Airlines"
   },
   {
     "id": "5",
-    "email": "john.smith@mail.com",
-    "username": "johnny",
-    "password": "letmein"
+    "email": "dispatch@swiss.com",
+    "username": "swiss_dispatch",
+    "password": "swiss123",
+    "role": "dispatcher",
+    "company": "Swiss"
   },
   {
     "id": "6",
-    "email": "dev@company.com",
-    "username": "developer",
-    "password": "devpass"
+    "email": "operations@lufthansa.com",
+    "username": "lufthansa_ops",
+    "password": "lufthansa123",
+    "role": "dispatcher",
+    "company": "Lufthansa"
   }
-] 
+]

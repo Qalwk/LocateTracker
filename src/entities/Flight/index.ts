@@ -1,1 +1,1 @@
-export { FlightTable as default } from './ui/FlightTable';
+export { FlightTable as default } from "./ui/FlightTable";

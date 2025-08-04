@@ -1,14 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router';
-import { AuthProvider } from 'shared/model/auth/context/AuthProvider';
+import React, { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router";
 
-import { ProtectedRoute } from 'shared/ui/ProtectedRoute';
-import { RedirectIfAuth } from 'shared/ui/RedirectIfAuth';
+import { AuthProvider } from "shared/model/auth/context/AuthProvider";
+import { ProtectedRoute } from "shared/ui/ProtectedRoute";
+import { RedirectIfAuth } from "shared/ui/RedirectIfAuth";
 
-import React, { Suspense } from 'react';
-
-const HomePage = React.lazy(() => import('pages/homePage'));
-const FlightTablePage = React.lazy(() => import('pages/flightTablePage'));
-const LoginPage = React.lazy(() => import('pages/loginPage'));
+const HomePage = React.lazy(() => import("pages/homePage"));
+const FlightTablePage = React.lazy(() => import("pages/flightTablePage"));
+const LoginPage = React.lazy(() => import("pages/loginPage"));
 
 export function AppRouter() {
   return (

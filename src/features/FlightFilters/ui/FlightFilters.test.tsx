@@ -1,11 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import FlightFilters from './FlightFilters';
-import React from 'react';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-test('input для ID доступен и работает', async () => {
+import React from "react";
+
+import FlightFilters from "./FlightFilters";
+
+test("input для ID доступен и работает", async () => {
   function Wrapper() {
-    const [flightId, setFlightId] = React.useState('');
+    const [flightId, setFlightId] = React.useState("");
     return (
       <FlightFilters
         flightId={flightId}
@@ -21,14 +23,14 @@ test('input для ID доступен и работает', async () => {
   }
 
   render(<Wrapper />);
-  const input = screen.getByLabelText('ID');
+  const input = screen.getByLabelText("ID");
   expect(input).toBeInTheDocument();
 
   // Проверяем ввод значения
-  await userEvent.type(input, '123');
-  expect(input).toHaveValue('123');
+  await userEvent.type(input, "123");
+  expect(input).toHaveValue("123");
 
   // Проверяем очистку
   await userEvent.clear(input);
-  expect(input).toHaveValue('');
+  expect(input).toHaveValue("");
 });

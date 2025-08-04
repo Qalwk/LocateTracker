@@ -1,3 +1,7 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
 
@@ -5,75 +9,76 @@ import { store } from "../../../app/store";
 import { AuthProvider } from "../../../shared/model/auth/context/AuthProvider";
 import { HomePage } from "./HomePage";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-
 // Мокаем API
 jest.mock("shared/api/axiosInstance", () => ({
   fetchFlights: jest.fn(() =>
-    Promise.resolve([
-      {
-        id: "S7129",
-        airline: "S7 Airlines",
-        airlineLogo: "images.png",
-        flightNumber: "S7129",
-        codes: ["88020", "RA-73420"],
-        from: {
-          city: "Moscow",
-          iata: "DME",
-          utc: "UTC+3",
-          distance: 3200,
-          duration: "4h 30m",
-          scheduled: "22:00",
-          actual: "22:10",
-          countryCode: "RU",
+    Promise.resolve({
+      flights: [
+        {
+          id: "S7129",
+          airline: "S7 Airlines",
+          airlineLogo: "images.png",
+          flightNumber: "S7129",
+          codes: ["88020", "RA-73420"],
+          from: {
+            city: "Moscow",
+            iata: "DME",
+            utc: "UTC+3",
+            distance: 3200,
+            duration: "4h 30m",
+            scheduled: "22:00",
+            actual: "22:10",
+            countryCode: "RU",
+          },
+          to: {
+            city: "Dubai",
+            iata: "DXB",
+            utc: "UTC+4",
+            distance: 3200,
+            duration: "4h 30m",
+            scheduled: "02:30",
+            estimated: "02:40",
+            countryCode: "AE",
+          },
+          aircraft: "Airbus A321neo",
+          speed: "860 km/h",
+          altitude: "11 200 m",
         },
-        to: {
-          city: "Dubai",
-          iata: "DXB",
-          utc: "UTC+4",
-          distance: 3200,
-          duration: "4h 30m",
-          scheduled: "02:30",
-          estimated: "02:40",
-          countryCode: "AE",
+        {
+          id: "TK143",
+          airline: "Turkish Airlines",
+          airlineLogo: "turkish-logo.png",
+          flightNumber: "TK143",
+          codes: ["93247", "TC-JFP"],
+          from: {
+            city: "Istanbul",
+            iata: "IST",
+            utc: "UTC+3",
+            distance: 7420,
+            duration: "9h 45m",
+            scheduled: "07:10",
+            actual: "07:18",
+            countryCode: "TR",
+          },
+          to: {
+            city: "Beijing",
+            iata: "PEK",
+            utc: "UTC+8",
+            distance: 7420,
+            duration: "9h 45m",
+            scheduled: "23:55",
+            estimated: "00:05",
+            countryCode: "CN",
+          },
+          aircraft: "Boeing 777-300ER",
+          speed: "910 km/h",
+          altitude: "12 200 m",
         },
-        aircraft: "Airbus A321neo",
-        speed: "860 km/h",
-        altitude: "11 200 m",
-      },
-      {
-        id: "TK143",
-        airline: "Turkish Airlines",
-        airlineLogo: "turkish-logo.png",
-        flightNumber: "TK143",
-        codes: ["93247", "TC-JFP"],
-        from: {
-          city: "Istanbul",
-          iata: "IST",
-          utc: "UTC+3",
-          distance: 7420,
-          duration: "9h 45m",
-          scheduled: "07:10",
-          actual: "07:18",
-          countryCode: "TR",
-        },
-        to: {
-          city: "Beijing",
-          iata: "PEK",
-          utc: "UTC+8",
-          distance: 7420,
-          duration: "9h 45m",
-          scheduled: "23:55",
-          estimated: "00:05",
-          countryCode: "CN",
-        },
-        aircraft: "Boeing 777-300ER",
-        speed: "910 km/h",
-        altitude: "12 200 m",
-      },
-    ]),
+      ],
+      totalCount: 2,
+      currentPage: 0,
+      totalPages: 1,
+    }),
   ),
 }));
 
@@ -88,7 +93,17 @@ jest.mock("features/auth/api/logout", () => ({
 
 // Мокаем localStorage
 const localStorageMock = {
-  getItem: jest.fn(),
+  getItem: jest.fn((key) => {
+    if (key === "accessToken") return "mock-access-token";
+    if (key === "userData")
+      return JSON.stringify({
+        username: "admin",
+        email: "admin@skytrack.com",
+        role: "admin",
+        company: null,
+      });
+    return null;
+  }),
   setItem: jest.fn(),
   removeItem: jest.fn(),
   clear: jest.fn(),

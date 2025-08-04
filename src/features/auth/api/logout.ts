@@ -1,4 +1,4 @@
-import { axiosInstance } from 'shared/api/axiosInstance';
+import { axiosInstance } from "shared/api/axiosInstance";
 
 export interface LogoutResponse {
   accessToken: string;
@@ -7,8 +7,7 @@ export interface LogoutResponse {
   email: string;
 }
 
-export const logoutRequest = async ()
-  : Promise<LogoutResponse> => {
-  const response = await axiosInstance.post<LogoutResponse>('/logout');
+export const logoutRequest = async (): Promise<LogoutResponse> => {
+  const response = await axiosInstance.post<LogoutResponse>("/logout");
   return response.data;
 };

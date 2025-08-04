@@ -1,4 +1,4 @@
-import { axiosInstance } from 'shared/api/axiosInstance';
+import { axiosInstance } from "shared/api/axiosInstance";
 
 export interface LoginRequest {
   email: string;
@@ -10,11 +10,13 @@ export interface LoginResponse {
   refreshToken: string;
   username: string;
   email: string;
+  role: string;
+  company: string | null;
 }
 
 export const loginRequest = async (
   data: LoginRequest,
 ): Promise<LoginResponse> => {
-  const response = await axiosInstance.post<LoginResponse>('/login', data);
+  const response = await axiosInstance.post<LoginResponse>("/login", data);
   return response.data;
 };

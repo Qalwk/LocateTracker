@@ -34,52 +34,9 @@ export default defineConfig([
       "react/react-in-jsx-scope": "off",
       "react/jsx-max-props-per-line": [1, { maximum: 1, when: "always" }],
 
-      // Сортировка импортов
-      "simple-import-sort/imports": [
-        "error",
-        {
-          groups: [
-            // 1. Внешние библиотеки
-            ["^react$", "^react-dom$", "^[a-z]"],
-
-            // 2. Стандартные хуки React
-            ["^react", "^use[A-Z]"],
-
-            // 3. Компоненты (все алиасы на компоненты и layout)
-            [
-              "^@components/",
-              "^@layout/",
-              "^@app-layout/",
-              "^@app-header/",
-              "^@app-footer/",
-              "^@app-ui/",
-            ],
-
-            // 4. Кастомные хуки
-            ["^@hooks/"],
-
-            // 5. Страницы
-            ["^@pages/"],
-
-            // 6. Redux store, slice, reducer, namespace
-            ["^@store/", "^@namespace/", "^@reducer/", "^@slice/"],
-
-            // 7. Сервисы и API
-            ["^@service/", "^@api/"],
-
-            // 8. Прочее (utils, route-path, app и относительные пути)
-            [
-              "^@utils/",
-              "^@app/",
-              "^\\.\\.(?!/?$)",
-              "^\\./(?=.*/)(?!/?$)",
-              "^\\.(?!/?$)",
-              "^\\./?$",
-            ],
-          ],
-        },
-      ],
-      "simple-import-sort/exports": "error",
+      // Сортировка импортов отключена - используется Prettier плагин
+      // "simple-import-sort/imports": "off",
+      // "simple-import-sort/exports": "off",
     },
     settings: {
       react: {
@@ -98,6 +55,7 @@ export default defineConfig([
   globalIgnores([
     "**/node_modules/",
     "**/dist/",
+    "**/backend/",
     ".commitlint.config.cjs",
     "eslint.config.js",
   ]),

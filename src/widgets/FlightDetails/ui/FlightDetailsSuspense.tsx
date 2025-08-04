@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react';
-import type { Flight } from 'shared/mocks/FlightsData';
+import React, { Suspense } from "react";
 
-const LazyFlightDetails = React.lazy(() => import('./FlightDetails'));
+import type { Flight } from "shared/mocks/FlightsData";
+
+const LazyFlightDetails = React.lazy(() => import("./FlightDetails"));
 
 type FlightDetailsProps = {
   flight: Flight | null;

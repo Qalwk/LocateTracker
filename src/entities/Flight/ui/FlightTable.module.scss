@@ -13,6 +13,22 @@
 .searchBlock {
   margin-bottom: 20px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.searchAndInfo {
+  position: relative;
+  flex: 1;
+}
+
+.totalInfo {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .searchInput {
@@ -37,6 +53,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-accent);
+  pointer-events: none;
 }
 
 .tableOuter {
@@ -163,6 +180,26 @@ td {
   color: var(--color-text);
   text-align: center;
   margin-right: 4px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 18px;
+  color: var(--color-accent);
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: #dc2626;
+  text-align: center;
+  padding: 20px;
 }
 
 @media (max-width: 700px) {

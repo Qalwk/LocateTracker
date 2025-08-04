@@ -1,38 +1,37 @@
-import type { RootState } from 'app/store';
-import clsx from 'clsx';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import type { RootState } from "app/store";
+import clsx from "clsx";
 
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 
-import { FlightList } from 'features/FlightList';
+import FlightFilters from "features/FlightFilters/ui/FlightFilters";
+import { FlightList } from "features/FlightList";
 
-import { FlightDetailsSuspense } from 'widgets/FlightDetails/index';
-import { Header } from 'widgets/Header';
+import { FlightDetailsSuspense } from "widgets/FlightDetails/index";
+import { Header } from "widgets/Header";
 
 import {
   addFavorite,
   removeFavorite,
-} from 'entities/Flight/model/favoriteFlightsSlice';
-
-import { type Flight } from 'shared/mocks/FlightsData';
+} from "entities/Flight/model/favoriteFlightsSlice";
 
 // import { useQuery } from '@tanstack/react-query';
-import { fetchFlights } from 'shared/api/axiosInstance';
+import { fetchFlights } from "shared/api/axiosInstance";
+import { type Flight } from "shared/mocks/FlightsData";
 
-import FlightFilters from 'features/FlightFilters/ui/FlightFilters';
-import { FlightTabs } from './FlightTabs';
-import styles from './HomePage.module.scss';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { FlightTabs } from "./FlightTabs";
+import styles from "./HomePage.module.scss";
 
 export function HomePage() {
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
-  const [flightId, setFlightId] = useState('');
-  const [flightCompany, setFlightCompany] = useState('');
-  const [flightFrom, setFlightFrom] = useState('');
-  const [flightTo, setFlightTo] = useState('');
+  const [flightId, setFlightId] = useState("");
+  const [flightCompany, setFlightCompany] = useState("");
+  const [flightFrom, setFlightFrom] = useState("");
+  const [flightTo, setFlightTo] = useState("");
 
   const location = useLocation();
 
@@ -42,30 +41,31 @@ export function HomePage() {
   // });
 
   const {
-    data: flightsData = [],
+    data: flightsData,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-    isError
+    isError,
   } = useInfiniteQuery({
-    queryKey: ['flights'],
-    queryFn: ({ pageParam = 0 }) => fetchFlights({ offset: pageParam as number, limit: 10 }),
+    queryKey: ["flights"],
+    queryFn: ({ pageParam = 0 }) =>
+      fetchFlights({ offset: pageParam as number, limit: 10 }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      // Приводим lastPage к типу массива, если fetchFlights возвращает массив
-      if (Array.isArray(lastPage) && lastPage.length < 10) return undefined;
+      // Проверяем, есть ли еще страницы
+      if (lastPage.totalPages <= allPages.length) return undefined;
       return allPages.length * 10;
-    }
+    },
   });
 
   const allFlights =
-    flightsData && 'pages' in flightsData && Array.isArray(flightsData.pages)
-      ? flightsData.pages.flat()
+    flightsData && "pages" in flightsData && Array.isArray(flightsData.pages)
+      ? flightsData.pages.flatMap((page) => page.flights || [])
       : [];
 
   useEffect(() => {
-    if (location.pathname.includes('/favorites')) {
+    if (location.pathname.includes("/favorites")) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -110,7 +110,7 @@ export function HomePage() {
   };
 
   useEffect(() => {
-    localStorage.setItem('favoriteFlights', JSON.stringify(favorites));
+    localStorage.setItem("favoriteFlights", JSON.stringify(favorites));
   }, [favorites]);
 
   const progressBar = 60;
@@ -134,7 +134,7 @@ export function HomePage() {
             />
           </div>
           {isError && (
-            <div style={{ color: 'red', textAlign: 'center', marginTop: 40 }}>
+            <div style={{ color: "red", textAlign: "center", marginTop: 40 }}>
               Не удалось загрузить список рейсов. Попробуйте позже.
             </div>
           )}
@@ -159,9 +159,7 @@ export function HomePage() {
           onClose={() => setSelectedFlight(null)}
         />
       </div>
-      <div className={styles.mapContainer}>
-        {/* <MapWithSuspense /> */}
-      </div>
+      <div className={styles.mapContainer}>{/* <MapWithSuspense /> */}</div>
     </div>
   );
 }

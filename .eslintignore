@@ -1,0 +1,6 @@
+# Backend files (JavaScript, not TypeScript)
+backend/
+node_modules/
+dist/
+build/
+*.min.js 

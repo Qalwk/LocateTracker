@@ -1,13 +1,12 @@
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import { useEffect, useRef } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-import { FlightCard } from 'entities/FlightCard/ui/FlightCard';
+import { FlightCard } from "entities/FlightCard/ui/FlightCard";
 
-import { type Flight } from 'shared/mocks/FlightsData';
+import { type Flight } from "shared/mocks/FlightsData";
 
-import { useRef, useEffect } from 'react';
-
-import styles from './FlightList.module.scss';
+import styles from "./FlightList.module.scss";
 
 interface FlightListProps {
   flights: Flight[];
@@ -32,25 +31,31 @@ export function FlightList({
   isLoading,
   onLoadMore,
   hasNextPage,
-  isFetchingNextPage
+  isFetchingNextPage,
 }: FlightListProps) {
-
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!hasNextPage || isFetchingNextPage) return;
+
+    // Проверяем, доступен ли IntersectionObserver (для тестов)
+    if (typeof IntersectionObserver === "undefined") {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           onLoadMore();
         }
       },
-      { threshold: 1 }
+      { threshold: 1 },
     );
     if (loadMoreRef.current) {
       observer.observe(loadMoreRef.current);
     }
-    console.log('loadMoreRef', loadMoreRef.current);
+    // eslint-disable-next-line no-console
+    console.log("loadMoreRef", loadMoreRef.current);
     return () => {
       if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
     };
@@ -59,10 +64,7 @@ export function FlightList({
   return (
     <div className={styles.flightList}>
       {isLoading ? (
-        <Skeleton
-          count={10}
-          className={styles.skeleton}
-        />
+        <Skeleton count={10} className={styles.skeleton} />
       ) : (
         flights.map((flight, idx) => {
           const isTrigger = hasNextPage && idx === flights.length - 5;
@@ -81,7 +83,7 @@ export function FlightList({
         })
       )}
       {isFetchingNextPage && (
-        <div style={{ textAlign: 'center', margin: 10 }}>Загрузка...</div>
+        <div style={{ textAlign: "center", margin: 10 }}>Загрузка...</div>
       )}
     </div>
   );
