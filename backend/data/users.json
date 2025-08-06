@@ -52,5 +52,32 @@
     "role": "dispatcher",
     "company": "Lufthansa",
     "favorites": []
+  },
+  {
+    "id": "7",
+    "email": "123@skytrack.com",
+    "username": "123",
+    "password": "123",
+    "role": "admin",
+    "company": null,
+    "favorites": []
+  },
+  {
+    "id": "8",
+    "email": "1234@skytrack.com",
+    "username": "1234",
+    "password": "123",
+    "role": "admin",
+    "company": null,
+    "favorites": []
+  },
+  {
+    "id": "9",
+    "email": "321@skytrack.com",
+    "username": "321",
+    "password": "123",
+    "role": "dispatcher",
+    "company": "Ryanair",
+    "favorites": []
   }
 ]

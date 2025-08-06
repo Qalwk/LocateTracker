@@ -53,3 +53,27 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export interface AddUserDto {
+  username: string;
+  password: string;
+  role: "admin" | "dispatcher";
+  companies: string[];
+}
+
+export async function addUser(data: AddUserDto) {
+  const response = await axiosInstance.post("/users", data, {
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken") || ""}`,
+    },
+  });
+  return response.data;
+}
+
+export async function getCompanies() {
+  const response = await axiosInstance.get("/companies", {
+    withCredentials: true,
+  });
+  return response.data.companies as string[];
+}

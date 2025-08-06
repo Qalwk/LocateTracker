@@ -1,0 +1,96 @@
+.adminAddAccountWrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-text);
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: $space-6;
+  margin-top: $space-24;
+  gap: $space-2;
+}
+
+.centered h1 {
+  margin-bottom: 32px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-default);
+}
+
+.centered form {
+  background: linear-gradient(var(--color-text), var(--color-text)) padding-box;
+  color: var(--color-white);
+  border-radius: $radius-lg;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  padding: 32px 40px;
+  min-width: $width-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.centered label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--color-default);
+}
+
+.centered input[type="text"],
+.centered input[type="password"],
+.centered select {
+  padding: 8px 12px;
+  border: 1px solid #bfc7d1;
+  border-radius: $radius-lg;
+  font-size: $font-size-sm;
+  margin-bottom: 8px;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.centered button[type="submit"] {
+  margin-top: 12px;
+  padding: 10px 0;
+  background: #2b5cfe;
+  color: #fff;
+  border: none;
+  border-radius: $radius-lg;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.centered button[type="submit"]:hover {
+  background: #1a3fa3;
+}
+
+.centered .companies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+@media (max-width: 759px) {
+  .adminAddAccountWrapper {
+    min-height: 100vh;
+    width: 100dvw;
+  }
+  .centered {
+    margin-left: 0;
+    margin-top: $space-24;
+    align-items: stretch;
+    padding: 0 24px;
+  }
+  .centered form {
+    min-width: unset;
+    width: 100%;
+    padding: 24px 12px;
+  }
+}

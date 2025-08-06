@@ -8,6 +8,9 @@ import { RedirectIfAuth } from "shared/ui/RedirectIfAuth";
 const HomePage = React.lazy(() => import("pages/homePage"));
 const FlightTablePage = React.lazy(() => import("pages/flightTablePage"));
 const LoginPage = React.lazy(() => import("pages/loginPage"));
+const AdminAddAccountPage = React.lazy(
+  () => import("pages/adminAddAccountPage"),
+);
 
 export function AppRouter() {
   return (
@@ -60,6 +63,14 @@ export function AppRouter() {
               element={
                 <ProtectedRoute>
                   <FlightTablePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/add-account"
+              element={
+                <ProtectedRoute onlyAdmin>
+                  <AdminAddAccountPage />
                 </ProtectedRoute>
               }
             />

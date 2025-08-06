@@ -20,6 +20,7 @@ export function Header() {
 
   const handleHomeLink = () => navigate("/");
   const handleTableLink = () => navigate("/flight-table");
+  const handleAddUserLink = () => navigate("/admin/add-account");
 
   const { logout, user } = useAuth();
 
@@ -59,6 +60,11 @@ export function Header() {
         >
           Flight Table
         </p>
+        {user?.role === "admin" && (
+          <p onClick={handleAddUserLink} style={{ cursor: "pointer" }}>
+            Add User
+          </p>
+        )}
         <button
           onClick={() => dispatch(toggleTheme())}
           className={styles.theme}

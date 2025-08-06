@@ -180,6 +180,52 @@ app.post("/api/logout", (req, res) => {
   res.json({ message: "Logged out" });
 });
 
+app.post("/api/users", authenticateToken, (req, res) => {
+  // Только админ может добавлять пользователей
+  if (!req.user || req.user.role !== "admin") {
+    return res
+      .status(403)
+      .json({ error: "Только администратор может добавлять пользователей" });
+  }
+  const { username, password, role, companies } = req.body;
+  if (!username || !password || !role) {
+    return res
+      .status(400)
+      .json({ error: "Необходимы username, password, role" });
+  }
+  try {
+    const users = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
+    // Проверка на уникальность username
+    if (users.some((u) => u.username === username)) {
+      return res
+        .status(409)
+        .json({ error: "Пользователь с таким username уже существует" });
+    }
+    // Генерируем новый id
+    const newId = (
+      users.length ? Math.max(...users.map((u) => Number(u.id))) + 1 : 1
+    ).toString();
+    // Для админа company = null, для диспетчера company = companies[0] (одна компания)
+    const userCompanies = Array.isArray(companies) ? companies : [];
+    const newUser = {
+      id: newId,
+      email: `${username}@skytrack.com`,
+      username,
+      password,
+      role,
+      company: role === "admin" ? null : userCompanies[0] || null,
+      favorites: [],
+    };
+    users.push(newUser);
+    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
+    res
+      .status(201)
+      .json({ message: "Пользователь успешно создан", user: newUser });
+  } catch (e) {
+    res.status(500).json({ error: "Ошибка при создании пользователя" });
+  }
+});
+
 // API для работы с избранными рейсами
 app.get("/api/favorites", authenticateToken, (req, res) => {
   try {
@@ -255,6 +301,17 @@ app.delete("/api/favorites/:flightId", authenticateToken, (req, res) => {
     res.json({ favorites: user.favorites });
   } catch (e) {
     res.status(500).json({ error: "Failed to remove favorite" });
+  }
+});
+
+app.get("/api/companies", (req, res) => {
+  try {
+    const flights = JSON.parse(fs.readFileSync(flightsPath, "utf-8"));
+    const companiesSet = new Set(flights.map((f) => f.airline).filter(Boolean));
+    const companies = Array.from(companiesSet);
+    res.json({ companies });
+  } catch (e) {
+    res.status(500).json({ error: "Ошибка при получении списка компаний" });
   }
 });
 
